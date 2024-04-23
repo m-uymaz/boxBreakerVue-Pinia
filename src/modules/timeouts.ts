@@ -5,8 +5,8 @@ const clearPrevTimeouts = (AppState: AppStateInterface): void => {
     AppState.timeouts.explodeTimeout && clearTimeout(AppState.timeouts.explodeTimeout);
     AppState.timeouts.explodeTimeout = null;
 
-    AppState.timeouts.rerenderTimeout && clearTimeout(AppState.timeouts.rerenderTimeout);
-    AppState.timeouts.rerenderTimeout = null;
+    AppState.timeouts.fillEmptyGridSpacesTimeout && clearTimeout(AppState.timeouts.fillEmptyGridSpacesTimeout);
+    AppState.timeouts.fillEmptyGridSpacesTimeout = null;
 }
 
 const explodeDelay = (AppState: AppStateInterface , time: number): Promise<void> => {
@@ -33,7 +33,7 @@ const fillEmptyGridSpacesDelay = (AppState: AppStateInterface, time: number): Pr
                 resolve();
             }, time);
 
-            AppState.timeouts.rerenderTimeout = timeout;
+            AppState.timeouts.fillEmptyGridSpacesTimeout = timeout;
         } catch (err) {
             reject(console.error(err));
         }

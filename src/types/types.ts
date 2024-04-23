@@ -2,7 +2,7 @@ export type AppStateInterface = {
   	gridArray: GridArray;
   	timeouts: {
     	explodeTimeout: number | null;
-    	rerenderTimeout: number | null;
+    	fillEmptyGridSpacesTimeout: number | null;
   	}
   	checkBoxPositions: ExplodedBoxes;
   	explodedBoxes: ExplodedBoxes;
