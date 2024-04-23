@@ -11,7 +11,7 @@ const fallOn = (store: AppStateInterface) => {
             ||
             store.timeouts.explodeTimeout
             ||
-            store.timeouts.rerenderTimeout
+            store.timeouts.fillEmptyGridSpacesTimeout
         ) return;
 
         if (store.gameOverState && store.interval) {
