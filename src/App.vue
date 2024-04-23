@@ -4,7 +4,7 @@
         <GameOverBanner :isGameOver="gameOverState" />
         <ComboBanner />
 
-        <LeftNav :score="score" />
+        <LeftNav :scoreString="getScore" />
 
         <div id="playground">
             <GridBox v-for="boxN in GRID_BOXES_SIZE" :key="boxN" :boxN="boxN"
@@ -48,7 +48,7 @@ const store = useAppStateStore()
 
 const {
     gridArray,
-    score,
+    getScore,
     fall,
     coughtBox,
     gameOverState,
