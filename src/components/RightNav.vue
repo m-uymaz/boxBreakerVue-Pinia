@@ -21,6 +21,7 @@
 <script setup lang="ts">
 const emit = defineEmits(['fall-on', 'fall-off'])
 
+// WHAT IS THE TYPE HERE???
 const fallClickHandler = (event: any) => {
     if (event.target.id === 'fall-on') {
         emit('fall-on')
