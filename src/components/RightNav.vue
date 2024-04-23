@@ -25,9 +25,9 @@ const emit = defineEmits(['fall-on', 'fall-off'])
 const fallClickHandler = (event: Event) => {
     const target = event.target as HTMLLabelElement
 
-    if (target && target.id === 'fall-on') {
+    if (target.id! === 'fall-on') {
         emit('fall-on')
-    } else if (target && target.id === 'fall-off') emit('fall-off')
+    } else if (target.id! === 'fall-off') emit('fall-off')
 
     target.blur()
 }
