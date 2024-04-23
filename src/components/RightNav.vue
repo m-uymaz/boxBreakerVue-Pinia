@@ -21,13 +21,15 @@
 <script setup lang="ts">
 const emit = defineEmits(['fall-on', 'fall-off'])
 
-// WHAT IS THE TYPE HERE???
-const fallClickHandler = (event: any) => {
-    if (event.target.id === 'fall-on') {
-        emit('fall-on')
-    } else if (event.target.id === 'fall-off') emit('fall-off')
+// LOL
+const fallClickHandler = (event: Event) => {
+    const target = event.target as HTMLLabelElement
 
-    event.target.blur()
+    if (target && target.id === 'fall-on') {
+        emit('fall-on')
+    } else if (target && target.id === 'fall-off') emit('fall-off')
+
+    target.blur()
 }
 </script>
 
