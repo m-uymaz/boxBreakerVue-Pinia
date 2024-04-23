@@ -25,7 +25,7 @@ const emit = defineEmits(['fall-on', 'fall-off'])
 const fallClickHandler = (event: any) => {
     if (event.target.id === 'fall-on') {
         emit('fall-on')
-    } else emit('fall-off')
+    } else if (event.target.id === 'fall-off') emit('fall-off')
 
     event.target.blur()
 }
