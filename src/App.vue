@@ -26,7 +26,6 @@ import { useAppStateStore } from './stores/appStateStore.js'
 // Modules
 import { colIndex, rowIndex } from './modules/findRowColIndex.js'
 import catchBox from './modules/catchBox.js'
-import throwBox from './modules/throwBox.js'
 import { floodFill } from './modules/floodFillFuncs.js'
 import { fillEmptyGridSpacesDelay, explodeDelay, clearPrevTimeouts } from './modules/timeouts.js'
 // Components
@@ -68,7 +67,7 @@ const keyHandler = (e: KeyboardEvent) => {
             break
         case KeyboardInputs.Space:
             if (coughtBox.value) {
-                throwBox(store)
+                store.throwBox()
 
                 floodFillChain(thrownBox.value!)
             } else {

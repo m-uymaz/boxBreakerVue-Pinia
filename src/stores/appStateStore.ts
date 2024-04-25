@@ -66,6 +66,45 @@ export const useAppStateStore = defineStore('appStateStore', {
             direction === KeyboardInputs.ArrowRight ? this.arrowIndex++ : this.arrowIndex--;
             this.gridArray[GridRowIndeces.Last][this.arrowIndex] = ARROW;
         },
+        throwBox() {
+            for (let yIndex = this.highestPositionY; 0 <= yIndex; yIndex--) {
+                // If you try to put a block on the last index line - Game Over
+                if (yIndex === GridRowIndeces.NextToLast && this.gridArray[yIndex][this.arrowIndex] !== null) {
+                    this.setGameOver()
+                    break;
+                };
+
+                if (yIndex === GridRowIndeces.First) {
+                    if (this.gridArray[yIndex][this.arrowIndex] === null) {
+                        this.gridArray[yIndex][this.arrowIndex] = this.coughtBox;
+                        this.thrownBox = { y: 0, x: this.arrowIndex }
+                    } else {
+                        this.gridArray[yIndex + 1][this.arrowIndex] = this.coughtBox;
+                        this.thrownBox = { y: 1, x: this.arrowIndex }
+                    }
+                    this.coughtBox = null;
+                }
+                if (this.gridArray[yIndex][this.arrowIndex] === null) continue;
+
+                if (yIndex !== GridRowIndeces.First) {
+                    //Put the box on the next Y index
+                    let upperGridIndex: number = yIndex + 1;
+                    this.gridArray[upperGridIndex][this.arrowIndex] = this.coughtBox;
+
+                    this.thrownBox = { y: yIndex + 1, x: this.arrowIndex }
+                    this.coughtBox = null;
+                }
+
+                //Find when the box is put, if it creates a new hight
+                if (yIndex >= this.highestPositionY) this.highestPositionY++;
+
+                if (this.thrownBox) {
+                    this.checkBoxPositions = [{ y: this.thrownBox.y, x: this.thrownBox.x }];
+                    this.coughtBoxFrom = null;
+                }
+                break;
+            }
+        },
         moveDown(): void {
             if (this.gameOverState) return;
 
