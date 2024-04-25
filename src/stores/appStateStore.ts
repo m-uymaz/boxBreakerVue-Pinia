@@ -119,7 +119,7 @@ export const useAppStateStore = defineStore('appStateStore', {
             this.gridArray.pop();
             this.gridArray.unshift(newArray);
 
-            let lineBlank: boolean = this.gridArray[this.highestPositionY + 1].filter(box => box !== null).length ? true : false;
+            let lineBlank: boolean = this.gridArray[this.highestPositionY + 1].every(box => box !== null);
 
             if (lineBlank) this.highestPositionY++;
             if (this.highestPositionY + 1 === GridLengths.RowLength) this.setGameOver();
