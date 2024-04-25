@@ -3,7 +3,7 @@
         ${isArrow}
         ${isOnArrowIndex}
         ${isBlinking ? 'soon-to-explode' : ''}
-        ${isExploding ? 'box-explotion' : ''}
+        ${isExploding ? 'box-explosion' : ''}
         `" v-bind:style="{
             backgroundColor:
                 isArrow ? caughtBoxColor || ALICEBLUE
@@ -66,11 +66,11 @@ defineProps<{
     }
 }
 
-.box-explotion {
-    animation: explotion 0.4s linear;
+.box-explosion {
+    animation: explosion 0.4s linear;
 }
 
-@keyframes explotion {
+@keyframes explosion {
     0% {
         background-image: url('/explotion.webp');
         background-size: contain;
