@@ -26,7 +26,6 @@ import { useAppStateStore } from './stores/appStateStore.js'
 // Modules
 import { colIndex, rowIndex } from './modules/findRowColIndex.js'
 import moveArrow from './modules/playerMovement.js'
-import moveDown from './modules/moveDown.js'
 import catchBox from './modules/catchBox.js'
 import throwBox from './modules/throwBox.js'
 import { floodFill } from './modules/floodFillFuncs.js'
@@ -56,7 +55,7 @@ const {
     explodedBoxes,
     explodingBoxesN,
     blinkingBoxesN,
-    checkBoxPositions
+    checkBoxPositions,
 } = storeToRefs(store)
 
 const keyHandler = (e: KeyboardEvent) => {
@@ -80,7 +79,7 @@ const keyHandler = (e: KeyboardEvent) => {
         default:
             if (fall.value) return
 
-            moveDown(store)
+            store.moveDown()
             break
     }
 }

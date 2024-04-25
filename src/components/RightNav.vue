@@ -5,11 +5,11 @@
                 <label id="interval-label" for="interval">Fall Down</label>
             </div>
             <fieldset>
-                <label @click="fallOn(store)" for="fall-on">
+                <label @click="fallClickHandler" for="fall-on">
                     On
                     <input type="radio" value="true" name="fallOption" id="fall-on">
                 </label>
-                <label @click="fallOff(store)" for="fall-off">
+                <label @click="fallClickHandler" for="fall-off">
                     Off
                     <input type="radio" value="false" name="fallOption" id="fall-off" checked>
                 </label>
@@ -19,13 +19,19 @@
 </template>
 
 <script setup lang="ts">
-import { AppStateInterface } from '../types/types'
 import { useAppStateStore } from '../stores/appStateStore'
-import moveDown from '../modules/moveDown'
 
 const store = useAppStateStore()
 
-const fallOn = (store: AppStateInterface) => {
+const fallClickHandler = (event: Event) => {
+    const target = event.target as HTMLLabelElement
+    if (target.id! === 'fall-on') {
+        fallOn()
+    } else if (target.id! === 'fall-off') fallOff()
+    target.blur()
+}
+
+const fallOn = () => {
     if (store.fall) return;
     store.fall = true;
     store.interval = setInterval(() => {
@@ -43,7 +49,7 @@ const fallOn = (store: AppStateInterface) => {
         }
 
         if (store.countMilliseconds === 2500) {
-            moveDown(store);
+            store.moveDown();
             store.countMilliseconds = 0;
         }
 
@@ -51,7 +57,7 @@ const fallOn = (store: AppStateInterface) => {
     }, 100);
 }
 
-const fallOff = (store: AppStateInterface) => {
+const fallOff = () => {
     if (!store.fall) return;
     store.fall = false;
     if (store.interval) {

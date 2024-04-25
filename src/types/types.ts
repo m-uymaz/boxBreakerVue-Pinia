@@ -17,7 +17,7 @@ export type AppStateInterface = {
   	fall: boolean;
   	interval: number | null;
   	countMilliseconds: number;
-  	score: number;
+    score: number;
 }
 
 export type ExplodedBoxes = { y: number, x: number }[];

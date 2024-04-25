@@ -1,13 +1,12 @@
 import { GridRowIndeces } from '../constants/constants.js';
-import { AppStateInterface } from '../types/types.js';
-import gameOver from "./gameOver.js";
+import { AppStore } from '../stores/appStateStore.js';
 
 // Throw box to the first null location
-const throwBox = (store: AppStateInterface): void => {
+const throwBox = (store: AppStore): void => {
     for (let yIndex = store.highestPositionY; 0 <= yIndex; yIndex--) {
         // If you try to put a block on the last index line - Game Over
         if (yIndex === GridRowIndeces.NextToLast && store.gridArray[yIndex][store.arrowIndex] !== null) {
-            gameOver(store);
+            store.setGameOver()
             break;
         };
 

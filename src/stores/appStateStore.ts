@@ -1,7 +1,17 @@
 import { defineStore } from "pinia";
+import { Store } from "pinia";
 
 import { generateInitialGrid } from "../modules/gridArray";
-import { AppStateInterface } from "../types/types";
+import { AppStateInterface, newLineArray } from "../types/types";
+import { GridLengths } from "../constants/constants";
+import generateNewLine from "../modules/generateNewLine";
+
+export type AppStore = Store<"appStateStore", AppStateInterface, {
+    getScore(): string;
+}, {
+    setGameOver(): void;
+    moveDown(): void;
+}>
 
 export const useAppStateStore = defineStore('appStateStore', {
     state: (): AppStateInterface => ({
@@ -26,7 +36,7 @@ export const useAppStateStore = defineStore('appStateStore', {
         score: 0,
     }),
     getters: {
-        getScore() {
+        getScore(): string {
             if(this.score === 0) return '000000'
 
             const zerosArr = ['0', '0', '0', '0', '0', '0']
@@ -39,5 +49,26 @@ export const useAppStateStore = defineStore('appStateStore', {
             return scoreString
         }
     },
-    // ACTIONS ???
+
+    actions: {
+        setGameOver(): void {
+            this.gameOverState = true;
+        },
+        moveDown(): void {
+            if (this.gameOverState) return;
+
+            if (this.checkBoxPositions.length) this.checkBoxPositions.map(position => position.y++);
+            if (this.explodedBoxes.length) this.explodedBoxes.map(position => position.y++);
+            if (this.blinkingBoxesN.length) this.blinkingBoxesN = this.blinkingBoxesN.map(boxN => boxN += 10);
+    
+            const newArray: newLineArray = generateNewLine();
+            this.gridArray.pop();
+            this.gridArray.unshift(newArray);
+
+            let lineBlank: boolean = this.gridArray[this.highestPositionY + 1].filter(box => box !== null).length ? true : false;
+
+            if (lineBlank) this.highestPositionY++;
+            if (this.highestPositionY + 1 === GridLengths.RowLength) this.setGameOver();
+        }
+    }
 })
