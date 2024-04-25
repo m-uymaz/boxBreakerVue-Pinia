@@ -11,7 +11,7 @@
                 :rgb="gridArray[rowIndex(boxN)][colIndex(boxN)]"
                 :isOnArrowIndex="colIndex(boxN) === arrowIndex ? 'box-selected' : 'box'"
                 :isArrow="colIndex(boxN) === (arrowIndex) && boxN > LAST_ROW_N_START ? 'arrow' : ''"
-                :coughtBoxColor="caughtBox || null" :isBlinking="blinkingBoxesN.includes(boxN) ? true : false"
+                :caughtBoxColor="caughtBox || null" :isBlinking="blinkingBoxesN.includes(boxN) ? true : false"
                 :isExploding="explodingBoxesN.includes(boxN) ? true : false" />
         </div>
 
