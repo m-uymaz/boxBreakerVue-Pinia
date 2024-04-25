@@ -66,6 +66,20 @@ export const useAppStateStore = defineStore('appStateStore', {
             direction === KeyboardInputs.ArrowRight ? this.arrowIndex++ : this.arrowIndex--;
             this.gridArray[GridRowIndeces.Last][this.arrowIndex] = ARROW;
         },
+        catchBox(): void {
+            for (let y = GridRowIndeces.NextToLast; 0 <= y; y--) {
+                if (this.explodedBoxes.filter(obj => obj.y === y && obj.x === this.arrowIndex).length) break;
+
+                if (this.gridArray[y][this.arrowIndex] === null) {
+                    continue;
+                } else {
+                    this.coughtBox = this.gridArray[y][this.arrowIndex];
+                    this.gridArray[y][this.arrowIndex] = null;
+                    this.coughtBoxFrom = { y: y, x: this.arrowIndex }
+                    break;
+                }
+            }
+        },
         throwBox() {
             for (let yIndex = this.highestPositionY; 0 <= yIndex; yIndex--) {
                 // If you try to put a block on the last index line - Game Over

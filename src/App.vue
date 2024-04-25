@@ -25,7 +25,6 @@ import { GRID_BOXES_SIZE, LAST_ROW_N_START, KeyboardInputs } from './constants/c
 import { useAppStateStore } from './stores/appStateStore.js'
 // Modules
 import { colIndex, rowIndex } from './modules/findRowColIndex.js'
-import catchBox from './modules/catchBox.js'
 import { floodFill } from './modules/floodFillFuncs.js'
 import { fillEmptyGridSpacesDelay, explodeDelay, clearPrevTimeouts } from './modules/timeouts.js'
 // Components
@@ -71,7 +70,7 @@ const keyHandler = (e: KeyboardEvent) => {
 
                 floodFillChain(thrownBox.value!)
             } else {
-                catchBox(store)
+                store.catchBox()
             }
             break
         default:
