@@ -15,7 +15,7 @@
                 :isExploding="explodingBoxesN.includes(boxN) ? true : false" />
         </div>
 
-        <RightNav @fall-on="fallOn(store)" @fall-off="fallOff(store)" />
+        <RightNav />
     </main>
 </template>
 
@@ -31,7 +31,6 @@ import catchBox from './modules/catchBox.js'
 import throwBox from './modules/throwBox.js'
 import { floodFill } from './modules/floodFillFuncs.js'
 import { fillEmptyGridSpacesDelay, explodeDelay, clearPrevTimeouts } from './modules/timeouts.js'
-import { fallOn, fallOff } from './modules/fallOptions.js'
 // Components
 import GridBox from './components/GridBox.vue'
 import LeftNav from './components/LeftNav.vue'
