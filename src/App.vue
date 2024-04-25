@@ -25,7 +25,6 @@ import { GRID_BOXES_SIZE, LAST_ROW_N_START, KeyboardInputs } from './constants/c
 import { useAppStateStore } from './stores/appStateStore.js'
 // Modules
 import { colIndex, rowIndex } from './modules/findRowColIndex.js'
-import moveArrow from './modules/playerMovement.js'
 import catchBox from './modules/catchBox.js'
 import throwBox from './modules/throwBox.js'
 import { floodFill } from './modules/floodFillFuncs.js'
@@ -62,10 +61,10 @@ const keyHandler = (e: KeyboardEvent) => {
     if (gameOverState.value) return
     switch (e.code) {
         case KeyboardInputs.ArrowLeft:
-            moveArrow(store, KeyboardInputs.ArrowLeft)
+            store.playerMovements(KeyboardInputs.ArrowLeft)
             break
         case KeyboardInputs.ArrowRight:
-            moveArrow(store, KeyboardInputs.ArrowRight)
+            store.playerMovements(KeyboardInputs.ArrowRight)
             break
         case KeyboardInputs.Space:
             if (coughtBox.value) {

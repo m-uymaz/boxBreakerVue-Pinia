@@ -3,7 +3,7 @@ import { Store } from "pinia";
 
 import { generateInitialGrid } from "../modules/gridArray";
 import { AppStateInterface, newLineArray } from "../types/types";
-import { GridLengths } from "../constants/constants";
+import { GridLengths, KeyboardInputs, GridColumsIndeces, GridRowIndeces, ARROW } from "../constants/constants";
 import generateNewLine from "../modules/generateNewLine";
 
 export type AppStore = Store<"appStateStore", AppStateInterface, {
@@ -53,6 +53,18 @@ export const useAppStateStore = defineStore('appStateStore', {
     actions: {
         setGameOver(): void {
             this.gameOverState = true;
+        },
+        playerMovements(direction: string): void {
+            if (
+                direction === KeyboardInputs.ArrowLeft && this.arrowIndex === GridColumsIndeces.First
+                ||
+                direction === KeyboardInputs.ArrowRight && this.arrowIndex === GridColumsIndeces.Last
+            ) return;
+
+            this.gridArray[GridRowIndeces.Last][this.arrowIndex] = null;
+
+            direction === KeyboardInputs.ArrowRight ? this.arrowIndex++ : this.arrowIndex--;
+            this.gridArray[GridRowIndeces.Last][this.arrowIndex] = ARROW;
         },
         moveDown(): void {
             if (this.gameOverState) return;
