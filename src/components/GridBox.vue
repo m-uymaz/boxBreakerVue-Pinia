@@ -39,15 +39,15 @@ defineProps<{
     height: 46px;
 }
 
-@media (min-width: 576px) and (max-width: 991px) {
+@media (max-height: 900px) {
     .box {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
     }
 
     .box-selected {
-        width: 36px;
-        height: 36px;
+        width: 32px;
+        height: 32px;
     }
 }
 

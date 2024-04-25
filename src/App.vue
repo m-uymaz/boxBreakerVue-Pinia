@@ -124,10 +124,13 @@ async function floodFillChain(position: { y: number, x: number }): Promise<void>
     background-color: aliceblue;
 }
 
-@media (min-width: 576px) and (max-width: 991px) {
+@media (max-height: 900px) {
     #playground {
-        max-width: 420px;
-        max-height: 840px;
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      grid-template-rows: repeat(20, 1fr);
+
+      background-color: black;
     }
 }
 </style>

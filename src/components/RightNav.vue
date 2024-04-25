@@ -47,10 +47,4 @@ const fallClickHandler = (event: Event) => {
 #fall-option {
     text-align: center;
 }
-
-@media (min-width: 576px) and (max-width: 991px) {
-    #right-nav {
-        font-size: 1.0em;
-    }
-}
 </style>
