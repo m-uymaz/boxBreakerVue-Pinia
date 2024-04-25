@@ -1,17 +1,10 @@
 import { defineStore } from "pinia";
-import { Store } from "pinia";
 
 import { generateInitialGrid } from "../modules/gridArray";
-import { AppStateInterface, newLineArray } from "../types/types";
-import { GridLengths, KeyboardInputs, GridColumsIndeces, GridRowIndeces, ARROW } from "../constants/constants";
 import generateNewLine from "../modules/generateNewLine";
 
-export type AppStore = Store<"appStateStore", AppStateInterface, {
-    getScore(): string;
-}, {
-    setGameOver(): void;
-    moveDown(): void;
-}>
+import { AppStateInterface, newLineArray } from "../types/types";
+import { GridLengths, KeyboardInputs, GridColumsIndeces, GridRowIndeces, ARROW } from "../constants/constants";
 
 export const useAppStateStore = defineStore('appStateStore', {
     state: (): AppStateInterface => ({
@@ -38,14 +31,10 @@ export const useAppStateStore = defineStore('appStateStore', {
     getters: {
         getScore(): string {
             if(this.score === 0) return '000000'
-
             const zerosArr = ['0', '0', '0', '0', '0', '0']
             const appScoreString: string = this.score.toString()
-
             const scoreToDisplayArr: string[] = zerosArr.slice(0, zerosArr.length - appScoreString.length)
-
             const scoreString: string = scoreToDisplayArr.join('') + appScoreString
-
             return scoreString
         }
     },

@@ -1,3 +1,4 @@
+import { Store } from "pinia";
 export type AppStateInterface = {
   	gridArray: GridArray;
   	timeouts: {
@@ -19,6 +20,13 @@ export type AppStateInterface = {
   	countMilliseconds: number;
     score: number;
 }
+
+export type AppStore = Store<"appStateStore", AppStateInterface, {
+    getScore(): string;
+}, {
+    setGameOver(): void;
+    moveDown(): void;
+}>
 
 export type ExplodedBoxes = { y: number, x: number }[];
 export type GridArray = (string | null)[][];
