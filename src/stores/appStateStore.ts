@@ -19,8 +19,8 @@ export const useAppStateStore = defineStore('appStateStore', {
         explodingBoxesN: [],
         highestPositionY: 1,
         arrowIndex: 5,
-        coughtBox: null,
-        coughtBoxFrom: null,
+        caughtBox: null,
+        caughtBoxFrom: null,
         thrownBox: null,
         gameOverState: false,
         fall: false,
@@ -62,9 +62,9 @@ export const useAppStateStore = defineStore('appStateStore', {
                 if (this.gridArray[y][this.arrowIndex] === null) {
                     continue;
                 } else {
-                    this.coughtBox = this.gridArray[y][this.arrowIndex];
+                    this.caughtBox = this.gridArray[y][this.arrowIndex];
                     this.gridArray[y][this.arrowIndex] = null;
-                    this.coughtBoxFrom = { y: y, x: this.arrowIndex }
+                    this.caughtBoxFrom = { y: y, x: this.arrowIndex }
                     break;
                 }
             }
@@ -79,23 +79,23 @@ export const useAppStateStore = defineStore('appStateStore', {
 
                 if (yIndex === GridRowIndices.First) {
                     if (this.gridArray[yIndex][this.arrowIndex] === null) {
-                        this.gridArray[yIndex][this.arrowIndex] = this.coughtBox;
+                        this.gridArray[yIndex][this.arrowIndex] = this.caughtBox;
                         this.thrownBox = { y: 0, x: this.arrowIndex }
                     } else {
-                        this.gridArray[yIndex + 1][this.arrowIndex] = this.coughtBox;
+                        this.gridArray[yIndex + 1][this.arrowIndex] = this.caughtBox;
                         this.thrownBox = { y: 1, x: this.arrowIndex }
                     }
-                    this.coughtBox = null;
+                    this.caughtBox = null;
                 }
                 if (this.gridArray[yIndex][this.arrowIndex] === null) continue;
 
                 if (yIndex !== GridRowIndices.First) {
                     //Put the box on the next Y index
                     let upperGridIndex: number = yIndex + 1;
-                    this.gridArray[upperGridIndex][this.arrowIndex] = this.coughtBox;
+                    this.gridArray[upperGridIndex][this.arrowIndex] = this.caughtBox;
 
                     this.thrownBox = { y: yIndex + 1, x: this.arrowIndex }
-                    this.coughtBox = null;
+                    this.caughtBox = null;
                 }
 
                 //Find when the box is put, if it creates a new hight
@@ -103,7 +103,7 @@ export const useAppStateStore = defineStore('appStateStore', {
 
                 if (this.thrownBox) {
                     this.checkBoxPositions = [{ y: this.thrownBox.y, x: this.thrownBox.x }];
-                    this.coughtBoxFrom = null;
+                    this.caughtBoxFrom = null;
                 }
                 break;
             }

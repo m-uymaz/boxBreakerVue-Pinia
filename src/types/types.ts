@@ -11,8 +11,8 @@ export type AppStateInterface = {
   	explodingBoxesN: number[];
   	highestPositionY: number;
   	arrowIndex: number;
-  	coughtBox: string | null;
-  	coughtBoxFrom: { y: number, x: number } | null;
+  	caughtBox: string | null;
+  	caughtBoxFrom: { y: number, x: number } | null;
   	thrownBox: { x: number, y: number } | null;
   	gameOverState: boolean;
   	fall: boolean;

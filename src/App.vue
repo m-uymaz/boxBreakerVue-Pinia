@@ -11,7 +11,7 @@
                 :rgb="gridArray[rowIndex(boxN)][colIndex(boxN)]"
                 :isOnArrowIndex="colIndex(boxN) === arrowIndex ? 'box-selected' : 'box'"
                 :isArrow="colIndex(boxN) === (arrowIndex) && boxN > LAST_ROW_N_START ? 'arrow' : ''"
-                :coughtBoxColor="coughtBox || null" :isBlinking="blinkingBoxesN.includes(boxN) ? true : false"
+                :coughtBoxColor="caughtBox || null" :isBlinking="blinkingBoxesN.includes(boxN) ? true : false"
                 :isExploding="explodingBoxesN.includes(boxN) ? true : false" />
         </div>
 
@@ -45,7 +45,7 @@ const {
     gridArray,
     getScore,
     fall,
-    coughtBox,
+    caughtBox,
     gameOverState,
     arrowIndex,
     thrownBox,
@@ -65,7 +65,7 @@ const keyHandler = (e: KeyboardEvent) => {
             store.playerMovements(KeyboardInputs.ArrowRight)
             break
         case KeyboardInputs.Space:
-            if (coughtBox.value) {
+            if (caughtBox.value) {
                 store.throwBox()
 
                 floodFillChain(thrownBox.value!)
