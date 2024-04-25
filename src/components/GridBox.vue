@@ -1,7 +1,7 @@
 <template>
     <div v-bind:class="`
-        ${isArrow ? 'arrow' : ''}
-        ${isOnArrowIndex ? 'box-selected' : 'box'}
+        ${isArrow}
+        ${isOnArrowIndex}
         ${isBlinking ? 'soon-to-explode' : ''}
         ${isExploding ? 'box-explotion' : ''}
         `" v-bind:style="{
@@ -17,8 +17,8 @@
 import { ALICEBLUE } from '../constants/constants';
 defineProps<{
     rgb: string | null
-    isOnArrowIndex: boolean
-    isArrow: boolean
+    isOnArrowIndex: string
+    isArrow: string
     coughtBoxColor: string | null
     boxN: number
     isBlinking: boolean

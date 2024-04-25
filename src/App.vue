@@ -9,8 +9,8 @@
         <div id="playground">
             <GridBox v-for="boxN in GRID_BOXES_SIZE" :key="boxN" :boxN="boxN"
                 :rgb="gridArray[rowIndex(boxN)][colIndex(boxN)]"
-                :isOnArrowIndex="colIndex(boxN) === arrowIndex ? true : false"
-                :isArrow="colIndex(boxN) === (arrowIndex) && boxN > LAST_ROW_N_START ? true : false"
+                :isOnArrowIndex="colIndex(boxN) === arrowIndex ? 'box-selected' : 'box'"
+                :isArrow="colIndex(boxN) === (arrowIndex) && boxN > LAST_ROW_N_START ? 'arrow' : ''"
                 :coughtBoxColor="coughtBox || null" :isBlinking="blinkingBoxesN.includes(boxN) ? true : false"
                 :isExploding="explodingBoxesN.includes(boxN) ? true : false" />
         </div>
@@ -86,7 +86,7 @@ const keyHandler = (e: KeyboardEvent) => {
 }
 
 async function floodFillChain(position: { y: number, x: number }): Promise<void> {
-    // Flood Fill changes the state instantaniously
+    // Flood Fill changes the state instantaneously
     floodFill(store, position)
 
     clearPrevTimeouts(store)
