@@ -98,7 +98,7 @@ export const useAppStateStore = defineStore('appStateStore', {
                     this.caughtBox = null;
                 }
 
-                //Find when the box is put, if it creates a new hight
+                //When the box is put, find if it creates a hight
                 if (yIndex >= this.highestPositionY) this.highestPositionY++;
 
                 if (this.thrownBox) {
