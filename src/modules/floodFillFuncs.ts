@@ -31,7 +31,7 @@ function fill(copyGrid: GridArray, y: number, x: number, current: CurrentColor, 
     if (y > GridLengths.RowLength - 1) return;
 
     // If column is greater than copyGrid length - bottom case
-    if (x > GridLengths.ColumsLength - 1) return;
+    if (x > GridLengths.ColumnsLength - 1) return;
 
     // If this position does not equal the color or is null - bottom case
     if (copyGrid[y][x] !== current || copyGrid[y][x] === null) return;
@@ -65,7 +65,7 @@ function fillEmptyGridSpaces(store: AppStateInterface): void {
         store.score += 10;
     });
 
-    for (let x = 0; x < GridLengths.ColumsLength; x++) {
+    for (let x = 0; x < GridLengths.ColumnsLength; x++) {
         for (let y = 0; y < GridLengths.RowLength - 2; y++) {
             if (store.gridArray[y][x] === null) {
                 let nextNonNull = y + 1;

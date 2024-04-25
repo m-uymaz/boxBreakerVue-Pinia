@@ -12,15 +12,15 @@ enum KeyboardInputs {
 
 enum GridLengths {
     RowLength = 20,
-    ColumsLength = 10
+    ColumnsLength = 10
 }
 
-enum GridColumsIndeces {
+enum GridColumnsIndices {
     First = 0,
     Last = 9
 }
 
-enum GridRowIndeces {
+enum GridRowIndices {
     First = 0,
     NextToLast = 18,
     Last = 19
@@ -38,9 +38,9 @@ enum BoxColors {
 export {
     BoxColors,
     GridLengths,
-    GridRowIndeces,
+    GridRowIndices,
     KeyboardInputs,
-    GridColumsIndeces,
+    GridColumnsIndices,
     ALICEBLUE,
     ARROW,
     GRID_BOXES_SIZE,

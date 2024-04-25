@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
 
-import { generateInitialGrid } from "../modules/gridArray";
+import { generateInitialGrid } from "../modules/generateInitialGrid";
 import generateNewLine from "../modules/generateNewLine";
 
 import { AppStateInterface, newLineArray } from "../types/types";
-import { GridLengths, KeyboardInputs, GridColumsIndeces, GridRowIndeces, ARROW } from "../constants/constants";
+import { GridLengths, KeyboardInputs, GridColumnsIndices, GridRowIndices, ARROW } from "../constants/constants";
 
 export const useAppStateStore = defineStore('appStateStore', {
     state: (): AppStateInterface => ({
@@ -45,18 +45,18 @@ export const useAppStateStore = defineStore('appStateStore', {
         },
         playerMovements(direction: string): void {
             if (
-                direction === KeyboardInputs.ArrowLeft && this.arrowIndex === GridColumsIndeces.First
+                direction === KeyboardInputs.ArrowLeft && this.arrowIndex === GridColumnsIndices.First
                 ||
-                direction === KeyboardInputs.ArrowRight && this.arrowIndex === GridColumsIndeces.Last
+                direction === KeyboardInputs.ArrowRight && this.arrowIndex === GridColumnsIndices.Last
             ) return;
 
-            this.gridArray[GridRowIndeces.Last][this.arrowIndex] = null;
+            this.gridArray[GridRowIndices.Last][this.arrowIndex] = null;
 
             direction === KeyboardInputs.ArrowRight ? this.arrowIndex++ : this.arrowIndex--;
-            this.gridArray[GridRowIndeces.Last][this.arrowIndex] = ARROW;
+            this.gridArray[GridRowIndices.Last][this.arrowIndex] = ARROW;
         },
         catchBox(): void {
-            for (let y = GridRowIndeces.NextToLast; 0 <= y; y--) {
+            for (let y = GridRowIndices.NextToLast; 0 <= y; y--) {
                 if (this.explodedBoxes.filter(obj => obj.y === y && obj.x === this.arrowIndex).length) break;
 
                 if (this.gridArray[y][this.arrowIndex] === null) {
@@ -72,12 +72,12 @@ export const useAppStateStore = defineStore('appStateStore', {
         throwBox() {
             for (let yIndex = this.highestPositionY; 0 <= yIndex; yIndex--) {
                 // If you try to put a block on the last index line - Game Over
-                if (yIndex === GridRowIndeces.NextToLast && this.gridArray[yIndex][this.arrowIndex] !== null) {
+                if (yIndex === GridRowIndices.NextToLast && this.gridArray[yIndex][this.arrowIndex] !== null) {
                     this.setGameOver()
                     break;
                 };
 
-                if (yIndex === GridRowIndeces.First) {
+                if (yIndex === GridRowIndices.First) {
                     if (this.gridArray[yIndex][this.arrowIndex] === null) {
                         this.gridArray[yIndex][this.arrowIndex] = this.coughtBox;
                         this.thrownBox = { y: 0, x: this.arrowIndex }
@@ -89,7 +89,7 @@ export const useAppStateStore = defineStore('appStateStore', {
                 }
                 if (this.gridArray[yIndex][this.arrowIndex] === null) continue;
 
-                if (yIndex !== GridRowIndeces.First) {
+                if (yIndex !== GridRowIndices.First) {
                     //Put the box on the next Y index
                     let upperGridIndex: number = yIndex + 1;
                     this.gridArray[upperGridIndex][this.arrowIndex] = this.coughtBox;

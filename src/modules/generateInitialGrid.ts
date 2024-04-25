@@ -7,7 +7,7 @@ const generateInitialGrid = (): GridArray => {
     gridArray[19][5] = ARROW;
 
     for (let y = 0; y < GridLengths.RowLength; y++) {
-        for (let x = 0; x < GridLengths.ColumsLength; x++) {
+        for (let x = 0; x < GridLengths.ColumnsLength; x++) {
             if (y < 2) {
                 const color = randomColor();
                 gridArray[y][x] = color.rgb;
