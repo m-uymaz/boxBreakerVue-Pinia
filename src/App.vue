@@ -107,25 +107,11 @@ async function floodFillChain(position: { y: number, x: number }): Promise<void>
 }
 
 #playground {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(20, 1fr);
 
-    position: relative;
-
-    max-width: 520px;
-    max-height: 1040px;
+    background-color: black;
     border: 1px solid black;
-    background-color: aliceblue;
-}
-
-@media (max-height: 900px) {
-    #playground {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      grid-template-rows: repeat(20, 1fr);
-
-      background-color: black;
-    }
 }
 </style>
