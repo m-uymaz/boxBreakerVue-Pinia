@@ -1,43 +1,44 @@
-import { AppStateInterface } from "../types/types";
+import { AppStore } from "../types/types";
 import { fillEmptyGridSpaces } from "./floodFillFuncs";
 
-const clearPrevTimeouts = (AppState: AppStateInterface): void => {
-    AppState.timeouts.explodeTimeout && clearTimeout(AppState.timeouts.explodeTimeout);
-    AppState.timeouts.explodeTimeout = null;
+const clearPrevTimeouts = (store: AppStore): void => {
+    store.timeouts.explodeTimeout && clearTimeout(store.timeouts.explodeTimeout);
+    store.timeouts.explodeTimeout = null;
 
-    AppState.timeouts.fillEmptyGridSpacesTimeout && clearTimeout(AppState.timeouts.fillEmptyGridSpacesTimeout);
-    AppState.timeouts.fillEmptyGridSpacesTimeout = null;
+    store.timeouts.fillEmptyGridSpacesTimeout && clearTimeout(store.timeouts.fillEmptyGridSpacesTimeout);
+    store.timeouts.fillEmptyGridSpacesTimeout = null;
 }
 
-const explodeDelay = (AppState: AppStateInterface , time: number): Promise<void> => {
+const explodeDelay = (store: AppStore , time: number): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
         try {
             const timeout = setTimeout(() => {
-                AppState.explodingBoxesN = AppState.blinkingBoxesN;
-                AppState.blinkingBoxesN = [];
+                store.explodingBoxesN = store.blinkingBoxesN;
+                store.blinkingBoxesN = [];
+                fillEmptyGridSpaces(store)
                 resolve();
             }, time);
 
-            AppState.timeouts.explodeTimeout = timeout;
+            store.timeouts.explodeTimeout = timeout;
         } catch (err) {
             reject(console.error(err));
         }
     });
 }
 
-const fillEmptyGridSpacesDelay = (AppState: AppStateInterface, time: number): Promise<void> => {
-    return new Promise<void>((resolve, reject) => {
-        try {
-            const timeout = setTimeout(() => {
-                fillEmptyGridSpaces(AppState);
-                resolve();
-            }, time);
+// const fillEmptyGridSpacesDelay = (AppState: AppStateInterface, time: number): Promise<void> => {
+//     return new Promise<void>((resolve, reject) => {
+//         try {
+//             const timeout = setTimeout(() => {
+//                 fillEmptyGridSpaces(AppState);
+//                 resolve();
+//             }, time);
 
-            AppState.timeouts.fillEmptyGridSpacesTimeout = timeout;
-        } catch (err) {
-            reject(console.error(err));
-        }
-    });
-}
+//             AppState.timeouts.fillEmptyGridSpacesTimeout = timeout;
+//         } catch (err) {
+//             reject(console.error(err));
+//         }
+//     });
+// }
 
-export {clearPrevTimeouts, explodeDelay, fillEmptyGridSpacesDelay}
+export {clearPrevTimeouts, explodeDelay}

@@ -26,7 +26,7 @@ import { useAppStateStore } from './stores/appStateStore.js'
 // Modules
 import { colIndex, rowIndex } from './modules/findRowColIndex.js'
 import { floodFill } from './modules/floodFillFuncs.js'
-import { fillEmptyGridSpacesDelay, explodeDelay, clearPrevTimeouts } from './modules/timeouts.js'
+import { explodeDelay, clearPrevTimeouts } from './modules/timeouts.js'
 // Components
 import GridBox from './components/GridBox.vue'
 import LeftNav from './components/LeftNav.vue'
@@ -90,7 +90,6 @@ async function floodFillChain(position: { y: number, x: number }): Promise<void>
     if (!explodedBoxes.value.length) return
 
     await explodeDelay(store, 500)
-    await fillEmptyGridSpacesDelay(store, 300)
 
     checkBoxPositions.value.forEach((newPosition) => {
         floodFillChain(newPosition)

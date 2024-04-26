@@ -67,7 +67,7 @@ defineProps<{
 }
 
 .box-explosion {
-    animation: explosion 0.4s linear;
+    animation: explosion 0.2s linear;
 }
 
 @keyframes explosion {

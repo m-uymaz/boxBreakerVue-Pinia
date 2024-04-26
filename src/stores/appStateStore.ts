@@ -69,7 +69,7 @@ export const useAppStateStore = defineStore('appStateStore', {
                 }
             }
         },
-        throwBox() {
+        throwBox(): void {
             for (let yIndex = this.highestPositionY; 0 <= yIndex; yIndex--) {
                 // If you try to put a block on the last index line - Game Over
                 if (yIndex === GridRowIndices.NextToLast && this.gridArray[yIndex][this.arrowIndex] !== null) {
