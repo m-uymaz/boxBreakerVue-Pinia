@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
-import { generateInitialGrid } from "../modules/generateInitialGrid";
-import generateNewLine from "../modules/generateNewLine";
+import { generateInitialGrid } from "../modules/gameLogic/generateInitialGrid";
+import generateNewLine from "../modules/gameLogic/generateNewLine";
 
 import { AppStateInterface, newLineArray } from "../types/types";
 import { GridLengths, KeyboardInputs, GridColumnsIndices, GridRowIndices, ARROW } from "../constants/constants";

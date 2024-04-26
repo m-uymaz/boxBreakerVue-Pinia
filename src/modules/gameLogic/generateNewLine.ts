@@ -1,5 +1,5 @@
-import { newLineArray } from '../types/types.js';
-import randomColor from './randomColor.js';
+import { newLineArray } from '../../types/types.js';
+import {randomColor} from './index.js';
 
 const generateNewLine = () => {
     const arr: newLineArray = Array.from(Array(10)).map(() => {

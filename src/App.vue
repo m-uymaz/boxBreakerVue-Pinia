@@ -25,20 +25,18 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
 import { GRID_BOXES_SIZE, LAST_ROW_N_START, KeyboardInputs } from './constants/constants.js'
 import { useAppStateStore } from './stores/appStateStore.js'
 // Modules
-import { colIndex, rowIndex } from './modules/gameLogic'
-import { floodFill } from './modules/floodFillFuncs.js'
-import { explodeDelay, clearPrevTimeouts } from './modules/timeouts.js'
+import { colIndex, rowIndex, floodFill, explodeDelay, clearPrevTimeouts } from './modules/gameLogic'
 // Components
 import GridBox from './components/GridBox.vue'
 import LeftNav from './components/LeftNav.vue'
 import RightNav from './components/RightNav.vue'
 import GameOverBanner from './components/GameOverBanner.vue'
 import ComboBanner from './components/ComboBanner.vue'
-import { storeToRefs } from 'pinia'
 
 onMounted(() => {
     window.addEventListener('keydown', keyHandler)
