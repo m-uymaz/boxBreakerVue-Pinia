@@ -1,8 +1,8 @@
 import { GridLengths } from '../constants/constants.js';
-import { ExplodedBoxes, GridArray, CurrentColor, AppStateInterface } from '../types/types.js';
+import { ExplodedBoxes, GridArray, CurrentColor, AppStore } from '../types/types.js';
 import boxPositionN from './boxPositionN.js';
 
-function floodFill(store: AppStateInterface, position: { y: number, x: number }) {
+function floodFill(store: AppStore, position: { y: number, x: number }) {
     const copyGrid: GridArray = JSON.parse(JSON.stringify(store.gridArray));
     const current: CurrentColor = store.gridArray[position.y][position.x];
 
@@ -55,7 +55,7 @@ function fill(copyGrid: GridArray, y: number, x: number, current: CurrentColor, 
 }
 
 // After flood fill destroys boxes, fill the null spaces with boxes above (if there are any)
-function fillEmptyGridSpaces(store: AppStateInterface): void {
+function fillEmptyGridSpaces(store: AppStore): void {
     const changedBoxes: ExplodedBoxes = [];
 
 
