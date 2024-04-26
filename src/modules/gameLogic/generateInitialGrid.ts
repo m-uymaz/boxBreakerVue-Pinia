@@ -2,7 +2,7 @@ import { ARROW, GridLengths } from '../../constants/constants.js';
 import { randomColor } from './';
 import { GridArray } from '../../types/types.js';
 
-const generateInitialGrid = () => {
+export const generateInitialGrid = () => {
     const gridArray: GridArray = Array.from(Array(20), () => new Array(10).fill(null));
     gridArray[19][5] = ARROW;
 
@@ -16,5 +16,3 @@ const generateInitialGrid = () => {
     }
     return gridArray;
 }
-
-export { generateInitialGrid};
