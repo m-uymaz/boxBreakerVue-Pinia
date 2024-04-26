@@ -46,6 +46,7 @@ const fallOn = () => {
         if (store.gameOverState && store.interval) {
             clearInterval(store.interval);
             store.interval = null;
+            return;
         }
 
         if (store.countMilliseconds === 2500) {

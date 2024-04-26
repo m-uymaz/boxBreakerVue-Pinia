@@ -1,5 +1,7 @@
 <template>
     <h1 :class="isGameOver ? 'h1-blinking' : 'h1-none'">GAME OVER</br>!!!</h1>
+    <!-- <h1 :class="{'h1-blinking': isGameOver}">GAME OVER</br>!!!</h1>
+    <h1 :class="classesComputed">GAME OVER</br>!!!</h1> -->
 </template>
 
 <script setup lang="ts">
@@ -25,7 +27,7 @@ defineProps<{ isGameOver: boolean }>()
     text-align: center;
 }
 
-@media (min-width: 576px) and (max-width: 991px) {
+@media (max-height: 900px) {
     .h1-blinking {
         font-size: 3em;
     }

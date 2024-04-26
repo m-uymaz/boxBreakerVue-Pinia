@@ -9,7 +9,7 @@ const clearPrevTimeouts = (store: AppStore): void => {
     store.timeouts.fillEmptyGridSpacesTimeout = null;
 }
 
-const explodeDelay = (store: AppStore , time: number): Promise<void> => {
+const explodeDelay = (store: AppStore, time: number): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
         try {
             const timeout = setTimeout(() => {

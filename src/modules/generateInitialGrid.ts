@@ -2,7 +2,7 @@ import { ARROW, GridLengths } from '../constants/constants.js';
 import randomColor from './randomColor.js';
 import { GridArray } from '../types/types.js';
 
-const generateInitialGrid = (): GridArray => {
+const generateInitialGrid = () => {
     const gridArray: GridArray = Array.from(Array(20), () => new Array(10).fill(null));
     gridArray[19][5] = ARROW;
 

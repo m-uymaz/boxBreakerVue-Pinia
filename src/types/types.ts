@@ -1,4 +1,4 @@
-import { Store } from "pinia";
+import { useAppStateStore } from "../stores/appStateStore";
 export type AppStateInterface = {
   	gridArray: GridArray;
   	timeouts: {
@@ -21,17 +21,7 @@ export type AppStateInterface = {
     score: number;
 }
 
-export type AppStore = Store<"appStateStore", AppStateInterface,
-    {
-        getScore(): string; 
-        
-    }, {
-        setGameOver(): void;
-        playerMovements(direction: string): void;
-        catchBox(): void;
-        throwBox(): void;
-        moveDown(): void;
-    }>
+export type AppStore = ReturnType<typeof useAppStateStore>
 
 export type ExplodedBoxes = { y: number, x: number }[];
 export type GridArray = (string | null)[][];

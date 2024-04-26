@@ -7,12 +7,17 @@
         <LeftNav :scoreString="getScore" />
 
         <div id="playground">
-            <GridBox v-for="boxN in GRID_BOXES_SIZE" :key="boxN" :boxN="boxN"
+            <GridBox 
+                v-for="boxN in GRID_BOXES_SIZE" 
+                :key="boxN" 
+                :boxN="boxN"
                 :rgb="gridArray[rowIndex(boxN)][colIndex(boxN)]"
                 :isOnArrowIndex="colIndex(boxN) === arrowIndex ? 'box-selected' : 'box'"
                 :isArrow="colIndex(boxN) === (arrowIndex) && boxN > LAST_ROW_N_START ? 'arrow' : ''"
-                :caughtBoxColor="caughtBox || null" :isBlinking="blinkingBoxesN.includes(boxN) ? true : false"
-                :isExploding="explodingBoxesN.includes(boxN) ? true : false" />
+                :caughtBoxColor="caughtBox || null" 
+                :isBlinking="blinkingBoxesN.includes(boxN) ? true : false"
+                :isExploding="explodingBoxesN.includes(boxN) ? true : false" 
+            />
         </div>
 
         <RightNav />
@@ -24,7 +29,7 @@ import { onMounted } from 'vue'
 import { GRID_BOXES_SIZE, LAST_ROW_N_START, KeyboardInputs } from './constants/constants.js'
 import { useAppStateStore } from './stores/appStateStore.js'
 // Modules
-import { colIndex, rowIndex } from './modules/findRowColIndex.js'
+import { colIndex, rowIndex } from './modules/gameLogic'
 import { floodFill } from './modules/floodFillFuncs.js'
 import { explodeDelay, clearPrevTimeouts } from './modules/timeouts.js'
 // Components
