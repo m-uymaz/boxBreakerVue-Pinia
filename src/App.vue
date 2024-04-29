@@ -6,20 +6,8 @@
 
         <LeftNav :scoreString="getScore" />
 
-        <div id="playground">
-            <GridBox 
-                v-for="boxN in GRID_BOXES_SIZE" 
-                :key="boxN" 
-                :boxN="boxN"
-                :rgb="gridArray[rowIndex(boxN)][colIndex(boxN)]"
-                :isOnArrowIndex="colIndex(boxN) === arrowIndex ? 'box-selected' : 'box'"
-                :isArrow="colIndex(boxN) === (arrowIndex) && boxN > LAST_ROW_N_START ? 'arrow' : ''"
-                :caughtBoxColor="caughtBox || null" 
-                :isBlinking="blinkingBoxesN.includes(boxN) ? true : false"
-                :isExploding="explodingBoxesN.includes(boxN) ? true : false" 
-            />
-        </div>
-
+        <PlayGround />
+        
         <RightNav />
     </main>
 </template>
@@ -27,12 +15,12 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
-import { GRID_BOXES_SIZE, LAST_ROW_N_START, KeyboardInputs } from './constants/constants.js'
+import { KeyboardInputs } from './constants/constants.js'
 import { useAppStateStore } from './stores/appStateStore.js'
 // Modules
-import { colIndex, rowIndex, floodFill, explodeDelay, clearPrevTimeouts } from './modules/gameLogic'
+import { floodFill, explodeDelay, clearPrevTimeouts } from './modules/gameLogic'
 // Components
-import GridBox from './components/GridBox.vue'
+import PlayGround from './components/PlayGround.vue'
 import LeftNav from './components/LeftNav.vue'
 import RightNav from './components/RightNav.vue'
 import GameOverBanner from './components/GameOverBanner.vue'
@@ -45,16 +33,12 @@ onMounted(() => {
 const store = useAppStateStore()
 
 const {
-    gridArray,
     getScore,
     fall,
     caughtBox,
     gameOverState,
-    arrowIndex,
     thrownBox,
     explodedBoxes,
-    explodingBoxesN,
-    blinkingBoxesN,
     checkBoxPositions,
 } = storeToRefs(store)
 
@@ -106,14 +90,5 @@ async function floodFillChain(position: { y: number, x: number }): Promise<void>
     width: 100%;
     display: flex;
     flex-direction: row;
-}
-
-#playground {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(20, 1fr);
-
-    background-color: black;
-    border: 1px solid black;
 }
 </style>

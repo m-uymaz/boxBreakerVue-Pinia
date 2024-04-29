@@ -1,29 +1,53 @@
 <template>
-    <div v-bind:class="`
-        ${isArrow}
-        ${isOnArrowIndex}
-        ${isBlinking ? 'soon-to-explode' : ''}
-        ${isExploding ? 'box-explosion' : ''}
-        `" v-bind:style="{
-            backgroundColor:
-                isArrow ? caughtBoxColor || ALICEBLUE
-                    :
-                    rgb || ALICEBLUE
-        }">
-    </div>
+    <div :class="classObject" :style="{ backgroundColor: rgb}">
+</div>
 </template>
 
 <script setup lang="ts">
-import { ALICEBLUE } from '../constants/constants';
-defineProps<{
-    rgb: string | null
-    isOnArrowIndex: string
-    isArrow: string
-    caughtBoxColor: string | null
+import { computed } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useAppStateStore } from '../stores/appStateStore';
+import { colIndex, rowIndex } from '../modules/gameLogic';
+import { ALICEBLUE, ARROW, LAST_ROW_N_START } from '../constants/constants';
+const props = defineProps<{
     boxN: number
-    isBlinking: boolean
-    isExploding: boolean
 }>()
+
+const store = useAppStateStore()
+
+const {
+    explodingBoxesN,
+    blinkingBoxesN,
+    arrowIndex,
+    gridArray,
+    caughtBox
+} = storeToRefs(store)
+
+const isArrow = computed(() => {
+    return (colIndex(props.boxN) === arrowIndex.value) && (props.boxN > LAST_ROW_N_START)
+})
+
+const rgb = computed(() => {
+    if(isArrow.value && caughtBox.value) return caughtBox.value
+    const gridBoxValue = gridArray.value[rowIndex(props.boxN)][colIndex(props.boxN)]
+    if (
+        gridBoxValue === null
+        ||
+        gridBoxValue === ARROW
+    ) {
+        return ALICEBLUE
+    } else {
+        return gridArray.value[rowIndex(props.boxN)][colIndex(props.boxN)] || ''
+    }
+})
+
+const classObject = computed(() => ({
+    'soon-to-explode': blinkingBoxesN.value.includes(props.boxN),
+    'box-explosion': explodingBoxesN.value.includes(props.boxN),
+    'arrow': isArrow.value,
+    'box': !(colIndex(props.boxN) === arrowIndex.value),
+    'box-selected': colIndex(props.boxN) === arrowIndex.value
+    }))
 </script>
 
 <style scoped>
