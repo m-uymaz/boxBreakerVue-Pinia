@@ -1,4 +1,4 @@
-import { newLineArray } from '../../types/types.js';
+import { newLineArray } from '../../types/types';
 import {randomColor} from './';
 
 export const generateNewLine = () => {

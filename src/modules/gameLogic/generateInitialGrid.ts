@@ -1,10 +1,9 @@
-import { ARROW, GridLengths } from '../../constants/constants.js';
+import { GridLengths } from '../../constants/constants';
 import { randomColor } from './';
-import { GridArray } from '../../types/types.js';
+import { GridArray } from '../../types/types';
 
 export const generateInitialGrid = () => {
     const gridArray: GridArray = Array.from(Array(20), () => new Array(10).fill(null));
-    gridArray[19][5] = ARROW;
 
     for (let y = 0; y < GridLengths.RowLength; y++) {
         for (let x = 0; x < GridLengths.ColumnsLength; x++) {

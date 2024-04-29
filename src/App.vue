@@ -15,8 +15,8 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
-import { KeyboardInputs } from './constants/constants.js'
-import { useAppStateStore } from './stores/appStateStore.js'
+import { KeyboardInputs } from './constants/constants'
+import { useAppStateStore } from './stores/appStateStore'
 // Modules
 import { floodFill, explodeDelay, clearPrevTimeouts } from './modules/gameLogic'
 // Components

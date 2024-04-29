@@ -1,5 +1,5 @@
-import { GridLengths } from '../../constants/constants.js';
-import { ExplodedBoxes, GridArray, CurrentColor, AppStore } from '../../types/types.js';
+import { GridLengths } from '../../constants/constants';
+import { ExplodedBoxes, GridArray, CurrentColor, AppStore } from '../../types/types';
 import { boxPositionN } from './';
 
 function floodFill(store: AppStore, position: { y: number, x: number }) {
