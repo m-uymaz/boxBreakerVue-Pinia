@@ -29,7 +29,6 @@ export type GridArray = (string | null)[][];
 export type newLineArray = string[];
 export type CurrentColor = string | null;
 export type RandomColor = {
-    color: string;
     rgb: string;
   	index: number;
 }
