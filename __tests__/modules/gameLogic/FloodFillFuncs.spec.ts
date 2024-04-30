@@ -75,12 +75,11 @@ describe('Flood Fill Functions', () => {
     describe('FillEmptyGridSpaces Function', () => {
         test('...', () => {
             const store = useAppStateStore();
-            const colorToDestroy = BoxColors.red;
             const seedGrid: GridArray = Array.from(Array(20), (_, n) => {
                 if (n < 5 || n > 7) return generateNewLine();
                 return Array(10).fill(null);
             });
-            
+
             store.gridArray = seedGrid;
             const expectedNullIndices = [5, 6, 7];
 
