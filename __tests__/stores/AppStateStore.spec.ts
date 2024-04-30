@@ -41,32 +41,31 @@ describe('AppState Store', () => {
         expect(store.gameOverState).toBeTruthy();
     })
 
-    test('catches box from grid', () => {
+    test('catching box from grid', () => {
         const store = useAppStateStore();
 
-        // default indices
-        const caughtBoxFrom = { y: 1, x: 5 }
-        const caughtBoxRGB = store.gridArray[caughtBoxFrom.y][caughtBoxFrom.x];
+        const catchBoxFrom = { y: 1, x: 5 }
+        const caughtBoxRGB = store.gridArray[catchBoxFrom.y][catchBoxFrom.x];
 
         store.catchBox();
+
         expect(() => store.catchBox).toBeInstanceOf(Function);
         expect(typeof store.caughtBox).toEqual('string');
         expect(store.caughtBox).toEqual(caughtBoxRGB);
-        expect(store.gridArray[caughtBoxFrom.y][caughtBoxFrom.x]).toBeNull();
+        expect(store.gridArray[catchBoxFrom.y][catchBoxFrom.x]).toBeNull();
     })
 
     test('throwing box to same position it has been caught from', () => {
         const store = useAppStateStore();
 
-        // default indices
-        const caughtBoxFrom = { y: 1, x: 5 };
-        const caughtBoxRGB = store.gridArray[caughtBoxFrom.y][caughtBoxFrom.x];
+        const catchBoxFrom = { y: 1, x: 5 };
+        const caughtBoxRGB = store.gridArray[catchBoxFrom.y][catchBoxFrom.x];
 
         store.catchBox();
         store.throwBox();
 
-        expect(typeof store.gridArray[caughtBoxFrom.y][caughtBoxFrom.x]).toEqual('string');
-        expect(store.gridArray[caughtBoxFrom.y][caughtBoxFrom.x]).toEqual(caughtBoxRGB);
+        expect(typeof store.gridArray[catchBoxFrom.y][catchBoxFrom.x]).toEqual('string');
+        expect(store.gridArray[catchBoxFrom.y][catchBoxFrom.x]).toEqual(caughtBoxRGB);
     })
 
     test('moving arrow left', () => {
@@ -117,18 +116,18 @@ describe('AppState Store', () => {
 
     test('throw box to far left', () => {
         const store = useAppStateStore();
-        const farLeftDropPosition = {y: 2, x: 0}
+        const farLeftThrowPosition = {y: 2, x: 0}
 
         store.catchBox();
         const caughtBox = store.caughtBox;
 
         for (let i = 0; i < 10; i++) store.playerMovements(KeyboardInputs.ArrowLeft)
         
-        expect(store.gridArray[farLeftDropPosition.y][farLeftDropPosition.x]).toBeNull();
+        expect(store.gridArray[farLeftThrowPosition.y][farLeftThrowPosition.x]).toBeNull();
 
         store.throwBox();
 
-        expect(store.gridArray[farLeftDropPosition.y][farLeftDropPosition.x]).toEqual(caughtBox);
+        expect(store.gridArray[farLeftThrowPosition.y][farLeftThrowPosition.x]).toEqual(caughtBox);
     })
 
     test('throw box to far right', () => {
