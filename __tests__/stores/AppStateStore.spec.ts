@@ -1,6 +1,6 @@
 import { setActivePinia, createPinia } from 'pinia'
 import { useAppStateStore } from '../../src/stores/appStateStore'
-import { GridColumnsIndices, GridRowIndices, KeyboardInputs } from '../../src/constants/constants'
+import { GridColumnsIndices, GridRowIndices, KeyboardInputs, BoxColors } from '../../src/constants/constants'
 
 describe('AppState Store', () => {
     beforeEach(() => {
@@ -12,6 +12,7 @@ describe('AppState Store', () => {
 
     it('holds state', () => {
         const store = useAppStateStore();
+        const boxColors: string[] = Object.values(BoxColors);
 
         expect(store.gridArray.length).toBe(20);
 
@@ -19,7 +20,7 @@ describe('AppState Store', () => {
             expect(arr.length).toBe(10);
 
             if (index < 2) {
-                arr.forEach(el => expect(typeof el).toEqual('string'));
+                arr.forEach(el => expect(boxColors.includes(el!)).toBeTruthy());
             } else arr.forEach(el => expect(el).toBeNull());
         })
     })
@@ -30,7 +31,7 @@ describe('AppState Store', () => {
         expect(store.getScore).toEqual('000000');
     })
 
-    test('sets game over', () => {
+    it('sets game over', () => {
         const store = useAppStateStore();
 
         store.setGameOver()
