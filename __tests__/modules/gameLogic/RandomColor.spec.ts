@@ -1,7 +1,7 @@
 import { randomColor } from "../../../src/modules/gameLogic"
 import { BoxColors } from "../../../src/constants/constants";
 describe('Random Color', () => {
-    test('creates random color object', () => {
+    it('creates random color object', () => {
         const mock = jest.fn(randomColor);
 
         const colorObj = mock();
