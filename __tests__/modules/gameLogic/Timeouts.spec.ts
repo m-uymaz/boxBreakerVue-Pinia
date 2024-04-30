@@ -15,7 +15,7 @@ describe("Timeouts", () => {
 
   test("...", () => {
     const store = useAppStateStore();
-    const seedArrBlinkingBoxes = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+    const seedArrBlinkingBoxes = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20];  
 
     const timeout = explodeDelay(store, 1000);
 
@@ -26,8 +26,12 @@ describe("Timeouts", () => {
     const callBack = jest.fn(() => timeout);
 
     callBack();
-    jest.runAllTimers();
+    jest.advanceTimersByTime(500);
+    
+    expect(store.blinkingBoxesN).toEqual(seedArrBlinkingBoxes);
 
+    jest.advanceTimersByTime(500);
+    
     expect(callBack).toHaveBeenCalledTimes(1);
     expect(store.blinkingBoxesN).toEqual([]);
   });

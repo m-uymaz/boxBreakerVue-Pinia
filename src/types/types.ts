@@ -2,8 +2,8 @@ import { useAppStateStore } from "../stores/appStateStore";
 export type AppStateInterface = {
   	gridArray: GridArray;
   	timeouts: {
-    	explodeTimeout: number | null;
-    	fillEmptyGridSpacesTimeout: number | null;
+    	explodeTimeout: NodeJS.Timeout | null;
+    	fillEmptyGridSpacesTimeout: NodeJS.Timeout | null;
   	}
   	checkBoxPositions: ExplodedBoxes;
   	explodedBoxes: ExplodedBoxes;
@@ -16,7 +16,7 @@ export type AppStateInterface = {
   	thrownBox: { x: number, y: number } | null;
   	gameOverState: boolean;
   	fall: boolean;
-  	interval: number | null;
+  	interval: NodeJS.Timeout | null;
   	countMilliseconds: number;
     score: number;
 }
