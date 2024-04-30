@@ -1,11 +1,17 @@
 <template>
-    <h1 :class="isGameOver ? 'h1-blinking' : 'h1-none'">GAME OVER</br>!!!</h1>
+    <h1 :class="styleObj">GAME OVER</br>!!!</h1>
     <!-- <h1 :class="{'h1-blinking': isGameOver}">GAME OVER</br>!!!</h1>
     <h1 :class="classesComputed">GAME OVER</br>!!!</h1> -->
 </template>
 
 <script setup lang="ts">
-defineProps<{ isGameOver: boolean }>()
+import { computed } from 'vue';
+const props = defineProps<{ isGameOver: boolean }>()
+
+const styleObj = computed(() => ({
+    'h1-blinking': props.isGameOver,
+    'h1-none': !props.isGameOver
+}))
 </script>
 
 <style scoped>

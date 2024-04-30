@@ -2,7 +2,7 @@
     <div id="playground">
         <GridBox 
             v-for="boxN in GRID_BOXES_SIZE" 
-            :key="boxN" 
+            :key="boxN"
             :boxN="boxN"
         />
     </div>
