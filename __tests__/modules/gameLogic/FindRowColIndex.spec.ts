@@ -7,24 +7,24 @@ describe('Finds Row index', () => {
         const boxRowIndex = rowIndex(BoxN);
         
         const expectedIndex = 0;
-        expect(boxRowIndex).toEqual(expectedIndex);
-    })
+        expect(boxRowIndex).toBe(expectedIndex);
+    });
 
     test('returns the 5th row index', () => {
         const BoxN = 59;
         const boxRowIndex = rowIndex(BoxN);
 
         const expectedIndex = 5;
-        expect(boxRowIndex).toEqual(expectedIndex);
-    })
+        expect(boxRowIndex).toBe(expectedIndex);
+    });
 
     test('returns the last row index', () => {
         const BoxN = 195;
         const boxRowIndex = rowIndex(BoxN);
 
-        const expectedIndex = GridRowIndices.Last
-        expect(boxRowIndex).toEqual(expectedIndex);
-    })
+        const expectedIndex = GridRowIndices.Last;
+        expect(boxRowIndex).toBe(expectedIndex);
+    });
 })
 
 describe('Finds Column Index', () => {
@@ -33,22 +33,22 @@ describe('Finds Column Index', () => {
         const boxColIndex = colIndex(BoxN);
         
         const expectedIndex = GridColumnsIndices.First;
-        expect(boxColIndex).toEqual(expectedIndex);
-    })
+        expect(boxColIndex).toBe(expectedIndex);
+    });
 
     test('returns the last column index', () => {
         const BoxN = 10;
         const boxColIndex = colIndex(BoxN);
         
         const expectedIndex = GridColumnsIndices.Last;
-        expect(boxColIndex).toEqual(expectedIndex);
-    })
+        expect(boxColIndex).toBe(expectedIndex);
+    });
 
-        test('returns the 5th column index', () => {
+    test('returns the 5th column index', () => {
         const BoxN = 6;
         const boxColIndex = colIndex(BoxN);
         
         const expectedIndex = 5;
-        expect(boxColIndex).toEqual(expectedIndex);
-    })
-})
+        expect(boxColIndex).toBe(expectedIndex);
+    });
+});

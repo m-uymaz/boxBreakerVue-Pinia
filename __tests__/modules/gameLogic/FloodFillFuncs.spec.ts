@@ -9,7 +9,7 @@ describe('Flood Fill Functions', () => {
         // creates a fresh pinia and makes it active
         // so it's automatically picked up by any useStore() call
         // without having to pass it to it: `useStore(pinia)`
-    setActivePinia(createPinia());
+        setActivePinia(createPinia());
     });
 
     describe('Fill Function', () => {
@@ -24,8 +24,8 @@ describe('Flood Fill Functions', () => {
 
             fill(seedGrid, testPosition.y, testPosition.x, colorToDestroy, explodedBoxes);
 
-            expect(explodedBoxes.length).toEqual(20);
-        })
+            expect(explodedBoxes.length).toBe(20);
+        });
 
         test('destroying the second row with same color boxes', () => {
             const colorToDestroy = BoxColors.blue;
@@ -40,8 +40,8 @@ describe('Flood Fill Functions', () => {
             fill(seedGrid, testPosition.y, testPosition.x, colorToDestroy, explodedBoxes);
 
             expect(explodedBoxes.length).toBeGreaterThanOrEqual(10);
-        })
-    })
+        });
+    });
 
     describe('FloodFill Function', () => {
         test('if floodFill sets correct blinkingBoxes, checkBoxPositions and explodedBoxes array length', () => {
@@ -66,11 +66,11 @@ describe('Flood Fill Functions', () => {
             expect(store.explodedBoxes.length).toBeGreaterThanOrEqual(10);
 
             const allSameLength = [checkBoxPositionsLength, explodedBoxesLength]
-                .every(arrLength => arrLength === blinkingBoxesNLength)
+                .every(arrLength => arrLength === blinkingBoxesNLength);
 
             expect(allSameLength).toBeTruthy();
-        })
-    })
+        });
+    });
 
     describe('FillEmptyGridSpaces Function', () => {
         test('...', () => {
@@ -85,13 +85,13 @@ describe('Flood Fill Functions', () => {
 
             const areRowsNull = () => {
                 return expectedNullIndices.every((index) => store.gridArray[index].every(el => el === null))
-            }
+            };
 
             expect(areRowsNull()).toBeTruthy();
 
             fillEmptyGridSpaces(store);
 
             expect(areRowsNull()).toBeFalsy();
-        })
-    })
-})
+        });
+    });
+});

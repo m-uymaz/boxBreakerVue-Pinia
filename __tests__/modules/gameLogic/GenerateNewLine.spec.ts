@@ -6,13 +6,13 @@ describe('Generate New Line', () => {
         const arr = generateNewLine();
 
         expect(arr).toBeInstanceOf(Array);
-        expect(arr.length).toEqual(10);
-    })
+        expect(arr.length).toBe(10);
+    });
 
     test('All elements of array must be strings from BoxColors', () => {
         const arr = generateNewLine();
         const boxColors: string[] = Object.values(BoxColors);
 
         arr.forEach(rgb => expect(boxColors.includes(rgb)).toBeTruthy());
-    })
-})
+    });
+});

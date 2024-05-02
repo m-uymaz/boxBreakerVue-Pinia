@@ -5,8 +5,8 @@ describe('Random Color', () => {
         const colorObj = randomColor();
 
         expect(colorObj).toBeInstanceOf(Object);
-        expect(typeof colorObj.rgb).toEqual('string');
-        expect(typeof colorObj.index).toEqual('number');
+        expect(typeof colorObj.rgb).toBe('string');
+        expect(typeof colorObj.index).toBe('number');
     })
 
     test('random color index is in correct range', () => {

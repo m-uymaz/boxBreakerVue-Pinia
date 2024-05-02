@@ -8,16 +8,16 @@ describe('BoxPositionN', () => {
 
         const boxN = boxPositionN(indices.y, indices.x);
 
-        expect(boxN).toEqual(firstBox);
-    })
+        expect(boxN).toBe(firstBox);
+    });
 
     it('returns last possible grid box number', () => {
         const indices = { y: GridRowIndices.Last, x: GridColumnsIndices.Last }
 
         const boxN = boxPositionN(indices.y, indices.x);
 
-        expect(boxN).toEqual(GRID_BOXES_SIZE);
-    })
+        expect(boxN).toBe(GRID_BOXES_SIZE);
+    });
 
     it('returns the 75th box', () => {
         const targetBox = 75;
@@ -25,6 +25,6 @@ describe('BoxPositionN', () => {
 
         const boxN = boxPositionN(indices.y, indices.x);
 
-        expect(boxN).toEqual(targetBox);
-    })
-})
+        expect(boxN).toBe(targetBox);
+    });
+});

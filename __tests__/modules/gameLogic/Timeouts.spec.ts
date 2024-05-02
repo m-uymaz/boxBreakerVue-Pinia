@@ -42,10 +42,10 @@ describe("Timeouts", () => {
         timeoutFunc();
         jest.advanceTimersByTime(500);
 
-        expect(typeof store.timeouts.explodeTimeout).toEqual('object');
+        expect(typeof store.timeouts.explodeTimeout).toBe('object');
 
         clearPrevTimeouts(store);
 
         expect(store.timeouts.explodeTimeout).toBeNull();
-    })
+    });
 });
