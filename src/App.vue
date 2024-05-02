@@ -6,7 +6,7 @@
 
         <LeftNav :scoreString="getScore" />
 
-        <PlayGround />
+        <Playground />
         
         <RightNav />
     </main>
@@ -20,7 +20,7 @@ import { useAppStateStore } from './stores/appStateStore'
 // Modules
 import { floodFill, explodeDelay, clearPrevTimeouts } from './modules/gameLogic'
 // Components
-import PlayGround from './components/PlayGround.vue'
+import Playground from './components/Playground.vue'
 import LeftNav from './components/LeftNav.vue'
 import RightNav from './components/RightNav.vue'
 import GameOverBanner from './components/GameOverBanner.vue'
