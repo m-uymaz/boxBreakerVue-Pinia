@@ -10,6 +10,10 @@ describe("Timeouts", () => {
     setActivePinia(createPinia());
     });
 
+    Object.defineProperty(global, 'performance', {
+        writable: true,
+    });
+
     jest.useFakeTimers();
     jest.spyOn(global, "setTimeout");
 
