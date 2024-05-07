@@ -46,7 +46,7 @@ describe("Timeouts", () => {
         timeoutFunc();
         jest.advanceTimersByTime(500);
 
-        expect(typeof store.timeouts.explodeTimeout).toBe('object');
+        expect(typeof store.timeouts.explodeTimeout).toBe('number');
 
         clearPrevTimeouts(store);
 

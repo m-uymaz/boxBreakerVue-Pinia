@@ -146,10 +146,12 @@ const config: Config = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  // testEnvironment: "jest-environment-node",
+  testEnvironment: "jsdom",
 
   // Options that will be passed to the testEnvironment
-  // testEnvironmentOptions: {},
+    testEnvironmentOptions: {
+        customExportConditions: ["node", "node-addons"],
+  },
 
   // Adds a location field to test results
   // testLocationInResults: false,
@@ -175,7 +177,10 @@ const config: Config = {
   // testRunner: "jest-circus/runner",
 
   // A map from regular expressions to paths to transformers
-  // transform: undefined,
+    transform: {
+        "^.+\\.vue$": "@vue/vue3-jest",
+        "\\.[jt]sx?$": "babel-jest",
+    },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
