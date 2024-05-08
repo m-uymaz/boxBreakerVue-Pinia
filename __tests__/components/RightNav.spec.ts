@@ -55,5 +55,21 @@ describe('RightNav', () => {
 
         wrapper.vm.fallOff();
         expect(wrapper.vm.store.interval).toBeNull();
-    })
+    });
+
+    test('if ON radio button sets interval', () => {
+        expect(wrapper.vm.store.interval).toBeNull();
+
+        wrapper.find('[name="fallOn"]').trigger('click');
+
+        expect(wrapper.vm.store.interval).not.toBeNull();
+    });
+
+    test('if OFF radio button clears interval', () => {
+        wrapper.find('[name="fallOn"]').trigger('click');
+        expect(wrapper.vm.store.interval).not.toBeNull();
+
+        wrapper.find('[name="fallOff"]').trigger('click');
+        expect(wrapper.vm.store.interval).toBeNull();
+    });
 });

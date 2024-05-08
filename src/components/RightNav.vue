@@ -7,11 +7,11 @@
             <fieldset>
                 <label @click="fallClickHandler" for="fall-on">
                     On
-                    <input type="radio" value="true" name="fallOption" id="fall-on">
+                    <input type="radio" value="true" name="fallOn" id="fall-on">
                 </label>
                 <label @click="fallClickHandler" for="fall-off">
                     Off
-                    <input type="radio" value="false" name="fallOption" id="fall-off" checked>
+                    <input type="radio" value="false" name="fallOff" id="fall-off" checked>
                 </label>
             </fieldset>
         </div>
