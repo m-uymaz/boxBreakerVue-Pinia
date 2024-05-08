@@ -1,4 +1,4 @@
-import { AppStore } from "../../types/types";
+import { AppStore } from "../types/types";
 import { fillEmptyGridSpaces } from "./floodFillFuncs";
 
 const clearPrevTimeouts = (store: AppStore): void => {

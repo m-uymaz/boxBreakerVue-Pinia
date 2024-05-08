@@ -1,6 +1,6 @@
-import { GridLengths } from '../../constants/constants';
-import { ExplodedBoxes, GridArray, CurrentColor, AppStore } from '../../types/types';
-import { boxPositionN } from './';
+import { GridLengths } from '../constants/constants';
+import { ExplodedBoxes, GridArray, CurrentColor, AppStore } from '../types/types';
+import { boxPositionN } from './gameLogic';
 
 function floodFill(store: AppStore, position: { y: number, x: number }) {
     const copyGrid: GridArray = JSON.parse(JSON.stringify(store.gridArray));

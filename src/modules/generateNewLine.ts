@@ -1,5 +1,5 @@
-import { newLineArray } from '../../types/types';
-import {randomColor} from './';
+import { newLineArray } from '../types/types';
+import {randomColor} from './gameLogic';
 
 export const generateNewLine = () => {
     const arr: newLineArray = Array.from(Array(10)).map(() => {

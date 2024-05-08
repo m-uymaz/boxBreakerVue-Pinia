@@ -1,6 +1,6 @@
-import { GridLengths } from '../../constants/constants';
-import { randomColor } from './';
-import { GridArray } from '../../types/types';
+import { GridLengths } from '../constants/constants';
+import { randomColor } from './gameLogic';
+import { GridArray } from '../types/types';
 
 export const generateInitialGrid = () => {
     const gridArray: GridArray = Array.from(Array(20), () => new Array(10).fill(null));
