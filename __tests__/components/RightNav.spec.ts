@@ -1,24 +1,15 @@
 
-import { setActivePinia, createPinia } from 'pinia';
 import {createTestingPinia} from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils';
 import RightNav from '../../src/components/RightNav.vue'
-import { useAppStateStore } from '../../src/stores/appStateStore';
 
 describe('RightNav', () => {
     let wrapper;
-    let store;
     
     beforeEach(() => {
-        setActivePinia(createPinia())
-        store = useAppStateStore();
-        
         wrapper = shallowMount(RightNav, {
             global: {
                 plugins: [createTestingPinia()],
-                mocks: {
-                    $store: store
-                },
             },
         });
     });
