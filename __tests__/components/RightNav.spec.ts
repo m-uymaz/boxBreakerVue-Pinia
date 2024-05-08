@@ -34,11 +34,9 @@ describe('RightNav', () => {
         const spy = jest.spyOn(wrapper.vm, 'fallOn');
 
         wrapper.vm.fallOn();
-
         expect(spy).toHaveBeenCalled();
         
         jest.advanceTimersByTime(2500);
-
         expect(wrapper.vm.store.interval).not.toBeNull();
     });
 
@@ -46,11 +44,9 @@ describe('RightNav', () => {
         const spy = jest.spyOn(wrapper.vm, 'fallOn');
 
         wrapper.vm.fallOn();
-
         expect(spy).toHaveBeenCalled();
         
         jest.advanceTimersByTime(2500);
-
         expect(wrapper.vm.store.interval).not.toBeNull();
 
         wrapper.vm.fallOff();
@@ -61,7 +57,6 @@ describe('RightNav', () => {
         expect(wrapper.vm.store.interval).toBeNull();
 
         wrapper.find('[name="fallOn"]').trigger('click');
-
         expect(wrapper.vm.store.interval).not.toBeNull();
     });
 
