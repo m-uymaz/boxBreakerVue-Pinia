@@ -23,14 +23,6 @@ import { useAppStateStore } from '../stores/appStateStore'
 
 const store = useAppStateStore()
 
-const fallClickHandler = (event: Event) => {
-    const target = event.target as HTMLLabelElement
-    if (target.id! === 'fall-on') {
-        fallOn()
-    } else if (target.id! === 'fall-off') fallOff()
-    target.blur()
-}
-
 const fallOn = () => {
     if (store.fall) return;
     store.fall = true;
@@ -66,6 +58,14 @@ const fallOff = () => {
         store.interval = null;
         store.countMilliseconds = 0;
     }
+}
+
+const fallClickHandler = (event: Event) => {
+    const target = event.target as HTMLLabelElement
+    if (target.id! === 'fall-on') {
+        fallOn()
+    } else if (target.id! === 'fall-off') fallOff()
+    target.blur()
 }
 </script>
 

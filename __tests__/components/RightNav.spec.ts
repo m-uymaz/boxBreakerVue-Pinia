@@ -44,18 +44,36 @@ describe('RightNav', () => {
         expect(wrapper.vm.store.interval).toBeNull();
     });
 
-    test('if ON radio button sets interval', () => {
+    test('if ON radio btn sets interval', () => {
         expect(wrapper.vm.store.interval).toBeNull();
 
         wrapper.find('[name="fallOn"]').trigger('click');
         expect(wrapper.vm.store.interval).not.toBeNull();
     });
 
-    test('if OFF radio button clears interval', () => {
+    test('if OFF radio btn clears interval', () => {
         wrapper.find('[name="fallOn"]').trigger('click');
         expect(wrapper.vm.store.interval).not.toBeNull();
 
         wrapper.find('[name="fallOff"]').trigger('click');
+        expect(wrapper.vm.store.interval).toBeNull();
+    });
+
+    it('does not create new interval instances when there is a current one', () => {
+        wrapper.find('[name="fallOn"]').trigger('click');
+        const firstClickInstance = wrapper.vm.store.interval;
+
+        wrapper.find('[name="fallOn"]').trigger('click');
+        wrapper.find('[name="fallOn"]').trigger('click');
+
+        expect(wrapper.vm.store.interval).toBe(firstClickInstance);
+    });
+
+    it('does not change the null state of store.interval', () => {
+        wrapper.find('[name="fallOff"]').trigger('click');
+        wrapper.find('[name="fallOff"]').trigger('click');
+        wrapper.find('[name="fallOff"]').trigger('click');
+
         expect(wrapper.vm.store.interval).toBeNull();
     });
 });
