@@ -6,7 +6,8 @@ describe('LeftNav', () => {
         const wrapper = shallowMount(LeftNav, {
             props: {
                 scoreString: '000050'
-            }
+            },
+            attachTo: document.body
         });
 
         expect(wrapper.props().scoreString).toBe('000050');
