@@ -33,10 +33,13 @@ describe('AppState Store', () => {
 
         describe('getScore', () => {
             it('returns default score string', () => {
-                // TODO
-                const store = useAppStateStore();
+                expect(store.getScore).toBe('000000');
+            });
 
-                expect(store.getScore).toEqual('000000');
+            it('returns current score, with leading zeros', () => {
+                store.score = 50;
+
+                expect(store.getScore).toBe('000050');
             });
         });
     });
@@ -65,6 +68,21 @@ describe('AppState Store', () => {
                 expect(store.caughtBox).toEqual(caughtBoxRGB);
                 expect(store.gridArray[catchBoxFrom.y][catchBoxFrom.x]).toBeNull();
             });
+
+            test('boxes soon to explode can not be caught', () => {
+                const seedGrid: GridArray = Array.from(Array(20), (_, n) => {
+                    if (n < 1) return Array(10).fill(BoxColors.red);
+                    return Array(10).fill(null);
+                });
+                store.gridArray = JSON.parse(JSON.stringify(seedGrid));
+                const testPosition = { y: 0, x: 5 };
+
+                store.explodedBoxes.push(testPosition);
+                store.catchBox();
+
+                expect(store.caughtBox).toBeNull();
+                expect(store.gridArray[testPosition.y][testPosition.x]).not.toBeNull();
+            });
         });
 
         describe('throwBox()', () => {
@@ -92,6 +110,19 @@ describe('AppState Store', () => {
                 store.throwBox();
 
                 expect(store.gameOverState).toBe(true);
+            });
+
+            test('thrown box to first row, on a null col, equal the thrown box', () => {
+                const seedGrid: GridArray = Array.from(Array(20), (_, n) => {
+                    return Array(10).fill(null);
+                });
+                const testThrownPosition = { y: 0, x: 5 };
+
+                store.gridArray = JSON.parse(JSON.stringify(seedGrid));
+                store.caughtBox = BoxColors.red;
+                store.throwBox();
+
+                expect(store.gridArray[testThrownPosition.y][testThrownPosition.x]).toBe(BoxColors.red);
             });
         });
 
