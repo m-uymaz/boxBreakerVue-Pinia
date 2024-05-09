@@ -14,7 +14,7 @@ describe('GridBox', () => {
         store = useAppStateStore();
     });
 
-    test('...', () => {
+    test('all column boxes on the arrowIndex index are with box-selected style', () => {
         let boxN = 6;
 
         store.gridArray.forEach(() => {
@@ -29,7 +29,7 @@ describe('GridBox', () => {
             expect(wrapper.find('.box-selected').exists()).toBe(true);
             expect(wrapper.find('.box').exists()).not.toBe(true);
             boxN += 10;
-        })
+        });
     });
 
     test('...', () => {
@@ -47,6 +47,6 @@ describe('GridBox', () => {
             expect(wrapper.find('.box-selected').exists()).not.toBe(true);
             expect(wrapper.find('.box').exists()).toBe(true);
             boxN += 10;
-        })
+        });
     });
 });
