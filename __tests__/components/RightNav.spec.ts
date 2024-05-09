@@ -76,4 +76,8 @@ describe('RightNav', () => {
 
         expect(wrapper.vm.store.interval).toBeNull();
     });
+
+    test('fallClickHandler correctly calls fallOn(), when el id is fall-on', () => {
+        
+    })
 });

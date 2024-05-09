@@ -12,6 +12,7 @@ const clearPrevTimeouts = (store: AppStore): void => {
 const explodeDelay = (store: AppStore, time: number): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
         try {
+            if (time > 1000) throw new Error('Time given is too big');
             const timeout = setTimeout(() => {
                 store.explodingBoxesN = store.blinkingBoxesN;
                 store.blinkingBoxesN = [];
@@ -21,24 +22,9 @@ const explodeDelay = (store: AppStore, time: number): Promise<void> => {
 
             store.timeouts.explodeTimeout = timeout;
         } catch (err) {
-            reject(console.error(err));
+            reject(err);
         }
     });
 }
-
-// const fillEmptyGridSpacesDelay = (AppState: AppStateInterface, time: number): Promise<void> => {
-//     return new Promise<void>((resolve, reject) => {
-//         try {
-//             const timeout = setTimeout(() => {
-//                 fillEmptyGridSpaces(AppState);
-//                 resolve();
-//             }, time);
-
-//             AppState.timeouts.fillEmptyGridSpacesTimeout = timeout;
-//         } catch (err) {
-//             reject(console.error(err));
-//         }
-//     });
-// }
 
 export {clearPrevTimeouts, explodeDelay}

@@ -57,8 +57,6 @@ function fill(copyGrid: GridArray, y: number, x: number, current: CurrentColor, 
 // After flood fill destroys boxes, fill the null spaces with boxes above (if there are any)
 function fillEmptyGridSpaces(store: AppStore): void {
     const changedBoxes: ExplodedBoxes = [];
-
-
     // SCORE IS ADDED HERE!
     store.explodedBoxes.forEach(position => {
         store.gridArray[position.y][position.x] = null;

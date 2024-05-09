@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Timeouts explodeDelay() promise should catch err and reject 1`] = `"Time given is too big"`;
