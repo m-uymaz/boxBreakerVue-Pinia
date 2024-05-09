@@ -1,172 +1,218 @@
 import { setActivePinia, createPinia } from 'pinia';
 import { useAppStateStore } from '../../src/stores/appStateStore';
 import { GridColumnsIndices, GridRowIndices, KeyboardInputs, BoxColors } from '../../src/constants/constants';
+import { AppStore, GridArray } from '../../src/types/types';
 
 describe('AppState Store', () => {
+    let store: AppStore;
     beforeEach(() => {
         setActivePinia(createPinia());
+        store = useAppStateStore();
     });
 
-    it('holds correct initial grid state', () => {
-        const store = useAppStateStore();
-        const boxColors: string[] = Object.values(BoxColors);
+    describe('State', () => {
 
-        expect(store.gridArray.length).toBe(20);
+        describe('gridArray', () => {
+            it('holds correct initial grid state', () => {
+                const boxColors: string[] = Object.values(BoxColors);
 
-        store.gridArray.forEach((arr, index) => {
-            expect(arr.length).toBe(10);
+                expect(store.gridArray.length).toBe(20);
 
-            if (index < 2) {
-                arr.forEach(el => expect(boxColors.includes(el!)).toBeTruthy());
-            } else arr.forEach(el => expect(el).toBeNull());
+                store.gridArray.forEach((arr, index) => {
+                    expect(arr.length).toBe(10);
+
+                    if (index < 2) {
+                        arr.forEach(el => expect(boxColors.includes(el!)).toBeTruthy());
+                    } else arr.forEach(el => expect(el).toBeNull());
+                });
+            });
         });
     });
 
-    it('returns score', () => {
-        // TODO
-        const store = useAppStateStore();
+    describe('Getters', () => {
 
-        expect(store.getScore).toEqual('000000');
+        describe('getScore', () => {
+            it('returns default score string', () => {
+                // TODO
+                const store = useAppStateStore();
+
+                expect(store.getScore).toEqual('000000');
+            });
+        });
     });
 
-    it('sets game over', () => {
-        const store = useAppStateStore();
+    describe('Actions', () => {
 
-        store.setGameOver();
+        describe('setGameOver()', () => {
+            it('sets game over state to true', () => {
+                store.setGameOver();
 
-        // Any point of using this?
-        expect(store.setGameOver).toBeInstanceOf(Function);
-        expect(store.gameOverState).toBeTruthy();
-    });
+                // Any point of using this?
+                expect(store.setGameOver).toBeInstanceOf(Function);
+                expect(store.gameOverState).toBeTruthy();
+            });
+        });
 
-    test('catching box from grid', () => {
-        const store = useAppStateStore();
+        describe('catchBox()', () => {
+            it('catches box from the grid', () => {
+                const catchBoxFrom = { y: 1, x: 5 };
+                const caughtBoxRGB = store.gridArray[catchBoxFrom.y][catchBoxFrom.x];
 
-        const catchBoxFrom = { y: 1, x: 5 };
-        const caughtBoxRGB = store.gridArray[catchBoxFrom.y][catchBoxFrom.x];
+                store.catchBox();
 
-        store.catchBox();
+                expect(store.catchBox).toBeInstanceOf(Function);
+                expect(typeof store.caughtBox).toEqual('string');
+                expect(store.caughtBox).toEqual(caughtBoxRGB);
+                expect(store.gridArray[catchBoxFrom.y][catchBoxFrom.x]).toBeNull();
+            });
+        });
 
-        expect(store.catchBox).toBeInstanceOf(Function);
-        expect(typeof store.caughtBox).toEqual('string');
-        expect(store.caughtBox).toEqual(caughtBoxRGB);
-        expect(store.gridArray[catchBoxFrom.y][catchBoxFrom.x]).toBeNull();
-    });
+        describe('throwBox()', () => {
+            it('throws box to same position it has been caught from', () => {
+                const catchBoxFrom = { y: 1, x: 5 };
+                const caughtBoxRGB = store.gridArray[catchBoxFrom.y][catchBoxFrom.x];
 
-    test('throwing box to same position it has been caught from', () => {
-        const store = useAppStateStore();
+                store.catchBox();
+                store.throwBox();
 
-        const catchBoxFrom = { y: 1, x: 5 };
-        const caughtBoxRGB = store.gridArray[catchBoxFrom.y][catchBoxFrom.x];
+                expect(typeof store.gridArray[catchBoxFrom.y][catchBoxFrom.x]).toEqual('string');
+                expect(store.gridArray[catchBoxFrom.y][catchBoxFrom.x]).toEqual(caughtBoxRGB);
+            });
 
-        store.catchBox();
-        store.throwBox();
+            test('thrown box on the last index causes game over', () => {
+                const seedGrid: GridArray = Array.from(Array(20), (_, n) => {
+                    if (n < 19) return Array(10).fill(BoxColors.red);
+                    return Array(10).fill(null);
+                });
 
-        expect(typeof store.gridArray[catchBoxFrom.y][catchBoxFrom.x]).toEqual('string');
-        expect(store.gridArray[catchBoxFrom.y][catchBoxFrom.x]).toEqual(caughtBoxRGB);
-    });
+                store.gridArray = JSON.parse(JSON.stringify(seedGrid));
+                store.caughtBox = BoxColors.blue;
+                store.highestPositionY = GridRowIndices.NextToLast;
 
-    test('moving arrow left', () => {
-        const store = useAppStateStore();
-        let defaultArrowIndex = store.arrowIndex;
+                store.throwBox();
 
-        const mock = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowLeft));
+                expect(store.gameOverState).toBe(true);
+            });
+        });
 
-        mock();
+        describe('playerMovements()', () => {
+            test('moving arrow left', () => {
+                let defaultArrowIndex = store.arrowIndex;
 
-        expect(mock).toHaveBeenCalledTimes(1);
-        expect(store.arrowIndex).toEqual(--defaultArrowIndex);
-    });
+                const mock = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowLeft));
 
-    test('move arrow far left', () => {
-        const store = useAppStateStore();
-        const mock = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowLeft));
+                mock();
 
-        // move arrow to the left 10 times
-        for (let i = 0; i < 10; i++) mock();
+                expect(mock).toHaveBeenCalledTimes(1);
+                expect(store.arrowIndex).toEqual(--defaultArrowIndex);
+            });
 
-        expect(mock).toHaveBeenCalledTimes(10);
-        expect(store.arrowIndex).toEqual(GridColumnsIndices.First);
-    });
+            test('move arrow far left', () => {
+                const mock = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowLeft));
 
-    test('moving arrow right', () => {
-        const store = useAppStateStore();
-        let defaultArrowIndex = store.arrowIndex;
+                // move arrow to the left 10 times
+                for (let i = 0; i < 10; i++) mock();
 
-        const mock = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowRight));
+                expect(mock).toHaveBeenCalledTimes(10);
+                expect(store.arrowIndex).toEqual(GridColumnsIndices.First);
+            });
 
-        mock();
+            test('moving arrow right', () => {
+                let defaultArrowIndex = store.arrowIndex;
 
-        expect(mock).toHaveBeenCalledTimes(1);
-        expect(store.arrowIndex).toEqual(++defaultArrowIndex);
-    });
+                const mock = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowRight));
 
-    test('move arrow far right', () => {
-        const store = useAppStateStore();
-        const mock = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowRight));
+                mock();
 
-        // move arrow to the left 10 times
-        for (let i = 0; i < 10; i++) mock();
+                expect(mock).toHaveBeenCalledTimes(1);
+                expect(store.arrowIndex).toEqual(++defaultArrowIndex);
+            });
 
-        expect(mock).toHaveBeenCalledTimes(10);
-        expect(store.arrowIndex).toEqual(GridColumnsIndices.Last);
-    });
+            test('move arrow far right', () => {
+                const mock = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowRight));
 
-    test('throw box to far left', () => {
-        const store = useAppStateStore();
-        const farLeftThrowPosition = { y: 2, x: 0 }
+                // move arrow to the left 10 times
+                for (let i = 0; i < 10; i++) mock();
 
-        store.catchBox();
-        const caughtBox = store.caughtBox;
+                expect(mock).toHaveBeenCalledTimes(10);
+                expect(store.arrowIndex).toEqual(GridColumnsIndices.Last);
+            });
+        });
 
-        for (let i = 0; i < 10; i++) store.playerMovements(KeyboardInputs.ArrowLeft);
+        describe('moveDown()', () => {
+            it('creates 1 new grid line', () => {
+                const firstLineIndex = 0;
+                const secondLineIndex = 1;
+                const thirdLineIndex = 2;
+
+                expect(store.gridArray[firstLineIndex].every(el => el !== null)).toBeTruthy();
+                expect(store.gridArray[secondLineIndex].every(el => el !== null)).toBeTruthy();
+
+                expect(store.gridArray[thirdLineIndex].every(el => el !== null)).toBeFalsy();
+
+                store.moveDown();
+
+                expect(store.gridArray[thirdLineIndex].every(el => el !== null)).toBeTruthy();
+            });
+
+            test('if explodingBoxes and blinkingBoxesN move their positions, proportional to moveDown() being called', () => {
+                store.explodedBoxes = [{ y: 1, x: 5 }];
+                store.blinkingBoxesN = [10];
+
+                store.moveDown();
+                store.moveDown();
+                
+                expect(store.explodedBoxes[0]).toEqual({ y: 3, x: 5 });
+                expect(store.blinkingBoxesN[0]).toBe(30);
+            });
+
+            it('fills the whole grid', () => {
+                for (let i = 0; i < GridRowIndices.Last; i++) store.moveDown();
+
+                for (let i = 0; i < GridRowIndices.Last; i++) {
+                    expect(store.gridArray[i].every(el => el !== null)).toBeTruthy();
+                }
+            });
+        });
+
+        test('throw box to far left', () => {
+            const farLeftThrowPosition = { y: 2, x: 0 }
+
+            store.catchBox();
+            const caughtBox = store.caughtBox;
+
+            for (let i = 0; i < 10; i++) store.playerMovements(KeyboardInputs.ArrowLeft);
         
-        expect(store.gridArray[farLeftThrowPosition.y][farLeftThrowPosition.x]).toBeNull();
+            expect(store.gridArray[farLeftThrowPosition.y][farLeftThrowPosition.x]).toBeNull();
 
-        store.throwBox();
+            store.throwBox();
 
-        expect(store.gridArray[farLeftThrowPosition.y][farLeftThrowPosition.x]).toEqual(caughtBox);
-    });
+            expect(store.gridArray[farLeftThrowPosition.y][farLeftThrowPosition.x]).toEqual(caughtBox);
+        });
 
-    test('throw box to far right', () => {
-        const store = useAppStateStore();
-        const farLeftDropPosition = { y: 2, x: 9 }
+        test('throw box to far right', () => {
+            const farLeftDropPosition = { y: 2, x: 9 }
 
-        store.catchBox();
-        const caughtBox = store.caughtBox;
+            store.catchBox();
+            const caughtBox = store.caughtBox;
 
-        for (let i = 0; i < 10; i++) store.playerMovements(KeyboardInputs.ArrowRight);
+            for (let i = 0; i < 10; i++) store.playerMovements(KeyboardInputs.ArrowRight);
         
-        expect(store.gridArray[farLeftDropPosition.y][farLeftDropPosition.x]).toBeNull();
+            expect(store.gridArray[farLeftDropPosition.y][farLeftDropPosition.x]).toBeNull();
 
-        store.throwBox();
+            store.throwBox();
 
-        expect(store.gridArray[farLeftDropPosition.y][farLeftDropPosition.x]).toEqual(caughtBox);
-    });
+            expect(store.gridArray[farLeftDropPosition.y][farLeftDropPosition.x]).toEqual(caughtBox);
+        });
 
-    test('create 1 new line', () => {
-        const store = useAppStateStore();
-        const firstLineIndex = 0;
-        const secondLineIndex = 1;
-        const thirdLineIndex = 2;
+        test('if one box will cause game over, when it reaches the last grid index', () => {
+            store.catchBox();
+            store.playerMovements(KeyboardInputs.ArrowRight);
+            store.throwBox();
 
-        expect(store.gridArray[firstLineIndex].every(el => el !== null)).toBeTruthy();
-        expect(store.gridArray[secondLineIndex].every(el => el !== null)).toBeTruthy();
+            for (let i = 0; i < 20; i++) store.moveDown();
 
-        expect(store.gridArray[thirdLineIndex].every(el => el !== null)).toBeFalsy();
-
-        store.moveDown();
-
-        expect(store.gridArray[thirdLineIndex].every(el => el !== null)).toBeTruthy();
-    });
-
-    test('fill grid with lines', () => {
-        const store = useAppStateStore();
-
-        for (let i = 0; i < GridRowIndices.Last; i++) store.moveDown();
-
-        for (let i = 0; i < GridRowIndices.Last; i++) {
-            expect(store.gridArray[i].every(el => el !== null)).toBeTruthy();
-        }
+            expect(store.gameOverState).toBe(true);
+        });
     });
 });
