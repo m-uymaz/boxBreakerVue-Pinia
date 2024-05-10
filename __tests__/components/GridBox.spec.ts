@@ -22,7 +22,7 @@ describe('GridBox', () => {
         });
     });
 
-    test('all column boxes on the arrowIndex index are with box-selected style', () => {
+    test('all column boxes with "arrowIndex" index have .box-selected class', () => {
         let testBoxN = 6;
 
         store.gridArray.forEach(async () => {
@@ -34,7 +34,7 @@ describe('GridBox', () => {
         });
     });
 
-    test('...', () => {
+    test('column boxes NOT with "arrowIndex" index, have .box class', () => {
         let testBoxN = 10;
 
         store.gridArray.forEach(async () => {
