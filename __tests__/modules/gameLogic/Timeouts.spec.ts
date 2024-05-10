@@ -17,7 +17,7 @@ describe("Timeouts", () => {
     jest.useFakeTimers();
     jest.spyOn(global, "setTimeout");
 
-    test('explodingBoxeN takes arr values of blinkingBoxesN and blinkingBoxesN is left with no values in arr', () => {
+    test('explodingBoxeN takes arr values of blinkingBoxesN and blinkingBoxesN is left with no values', () => {
         const seedArrBlinkingBoxes = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20];  
         const timeoutFunc = jest.fn(() => explodeDelay(store, 1000));
     
@@ -51,7 +51,7 @@ describe("Timeouts", () => {
         expect(store.timeouts.explodeTimeout).toBeNull();
     });
 
-    it('explodeDelay() promise should catch err and reject',() => {
+    it('explodeDelay() promise should catch and reject err',() => {
         const timeoutFunc = jest.fn(() =>
             explodeDelay(store, 10000000000000000)
         );
