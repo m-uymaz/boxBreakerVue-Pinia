@@ -4,10 +4,9 @@ import LeftNav from '../../src/components/LeftNav.vue';
 describe('LeftNav', () => {
     test('If props given to component is displayed', async () => {
         const wrapper = shallowMount(LeftNav, {
+            props: {scoreString: '000050'},
             attachTo: document.body
         });
-
-        await wrapper.setProps({ scoreString: '000050' });
 
         expect(wrapper.props().scoreString).toBe('000050');
         expect(wrapper.find('#score-span').exists()).toBe(true);
