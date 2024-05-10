@@ -12,41 +12,37 @@ describe('GridBox', () => {
     beforeEach(() => {
         setActivePinia(createPinia());
         store = useAppStateStore();
+        wrapper = shallowMount(GridBox, {
+            props: {
+                boxN: 1
+            },
+            global: {
+                plugins: [createTestingPinia()],
+            }
+        });
     });
 
     test('all column boxes on the arrowIndex index are with box-selected style', () => {
-        let boxN = 6;
+        let testBoxN = 6;
 
-        store.gridArray.forEach(() => {
-            wrapper = shallowMount(GridBox, {
-                props: {
-                    boxN: boxN
-                },
-                global: {
-                    plugins: [createTestingPinia()],
-                },
-            });
+        store.gridArray.forEach(async () => {
+            await wrapper.setProps({ boxN: testBoxN });
+
             expect(wrapper.find('.box-selected').exists()).toBe(true);
             expect(wrapper.find('.box').exists()).not.toBe(true);
-            boxN += 10;
+            testBoxN += 10;
         });
     });
 
     test('...', () => {
-        let boxN = 10;
+        let testBoxN = 10;
 
-        store.gridArray.forEach(() => {
-            wrapper = shallowMount(GridBox, {
-                props: {
-                    boxN: boxN
-                },
-                global: {
-                    plugins: [createTestingPinia()],
-                },
-            });
+        store.gridArray.forEach(async () => {
+            await wrapper.setProps({ boxN: testBoxN });
+
             expect(wrapper.find('.box-selected').exists()).not.toBe(true);
             expect(wrapper.find('.box').exists()).toBe(true);
-            boxN += 10;
+            testBoxN += 10;
         });
     });
 });
