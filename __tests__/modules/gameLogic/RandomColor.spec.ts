@@ -1,28 +1,28 @@
 import { randomColor } from "../../../src/modules/gameLogic"
 import { BoxColors } from "../../../src/constants/constants";
-describe('Random Color', () => {
-    it('creates random color object', () => {
+describe('randomColor()', () => {
+    it('creates a random color object', () => {
         const colorObj = randomColor();
 
         expect(colorObj).toBeInstanceOf(Object);
         expect(typeof colorObj.rgb).toBe('string');
         expect(typeof colorObj.index).toBe('number');
-    })
+    });
 
-    test('random color index is in correct range', () => {
+    test('value of "index" is in correct range', () => {
         for (let i = 0; i < 10; i++) {
             const colorObj = randomColor();
             expect(colorObj.index).toBeGreaterThanOrEqual(0);
             expect(colorObj.index).toBeLessThanOrEqual(5);
-        }
-    })
+        };
+    });
 
-    test('random color rgb is correct', () => {
+    test('value of "rgb" is always from BoxColors enum', () => {
         const boxColors: string[] = Object.values(BoxColors);
         
         for (let i = 0; i < 10; i++) {
             const colorObj = randomColor();
             expect(boxColors.includes(colorObj.rgb))
-        }
-    })
-})
+        };
+    });
+});

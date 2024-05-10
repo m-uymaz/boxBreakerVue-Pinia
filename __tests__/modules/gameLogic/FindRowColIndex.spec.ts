@@ -25,7 +25,7 @@ describe('Finds Row index', () => {
         const expectedIndex = GridRowIndices.Last;
         expect(boxRowIndex).toBe(expectedIndex);
     });
-})
+});
 
 describe('Finds Column Index', () => {
     test('returns the first column index', () => {
