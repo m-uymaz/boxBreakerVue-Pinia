@@ -23,12 +23,12 @@ const {
     caughtBox
 } = storeToRefs(store)
 
-const isArrow = computed(() => {
+const isBoxArrow = computed(() => {
     return (colIndex(props.boxN) === arrowIndex.value) && (props.boxN > LAST_ROW_N_START)
 })
 
 const rgb = computed(() => {
-    if(isArrow.value && caughtBox.value) return caughtBox.value
+    if(isBoxArrow.value && caughtBox.value) return caughtBox.value
     const gridBoxValue = gridArray.value[rowIndex(props.boxN)][colIndex(props.boxN)]
     if (
         gridBoxValue === null
@@ -41,12 +41,24 @@ const rgb = computed(() => {
     }
 })
 
+const isBoxOnArrowVertical = computed(() => {
+    return (colIndex(props.boxN) === arrowIndex.value)
+})
+
+const isBoxExploding = computed(() => {
+    return explodingBoxesN.value.includes(props.boxN)
+})
+
+const isBoxBlinking = computed(() => {
+    return blinkingBoxesN.value.includes(props.boxN)
+})
+
 const classObject = computed(() => ({
-    'soon-to-explode': blinkingBoxesN.value.includes(props.boxN),
-    'box-explosion': explodingBoxesN.value.includes(props.boxN),
-    'arrow': isArrow.value,
-    'box': !(colIndex(props.boxN) === arrowIndex.value),
-    'box-selected': colIndex(props.boxN) === arrowIndex.value
+    'soon-to-explode': isBoxBlinking.value,
+    'box-explosion': isBoxExploding.value,
+    'arrow': isBoxArrow.value,
+    'box': !isBoxOnArrowVertical.value,
+    'box-selected': isBoxOnArrowVertical.value
     }))
 </script>
 
