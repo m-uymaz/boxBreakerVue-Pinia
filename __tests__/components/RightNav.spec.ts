@@ -118,7 +118,7 @@ describe('RightNav', () => {
         expect(wrapper.vm.store.moveDown).toHaveBeenCalledTimes(4);
     });
 
-    test('an active explodeTimeout causes fallOn() to return and not continue the function', () => {
+    test('an active explodeTimeout causes fallOn() to not continue the function and not increment countMilliseconds', () => {
         const fallOnRadioBtn = wrapper.find('[name="fallOn"]');
         wrapper.vm.store.timeouts.explodeTimeout = 100;
 
