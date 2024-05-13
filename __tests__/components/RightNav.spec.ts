@@ -59,6 +59,26 @@ describe('RightNav', () => {
         expect(wrapper.vm.store.interval).toBeNull();
     });
 
+    it('increments store.countMilliseconds by 100, every 100ms', () => {
+        wrapper.find('[name="fallOn"]').trigger('click');
+
+        jest.advanceTimersByTime(2500);
+
+        expect(wrapper.vm.store.countMilliseconds).toBe(2500);
+    });
+
+    test('store.countMilliseconds should reset to 0 and start over again, after 2500ms', () => {
+        wrapper.find('[name="fallOn"]').trigger('click');
+
+        jest.advanceTimersByTime(2600);
+
+        expect(wrapper.vm.store.countMilliseconds).toBe(100);
+
+        jest.advanceTimersByTime(900);
+
+        expect(wrapper.vm.store.countMilliseconds).toBe(1000);
+    });
+
     it('does not create new interval instance when a current one is active', () => {
         const fallOnRadioBtn = wrapper.find('[name="fallOn"]');
 
@@ -80,12 +100,21 @@ describe('RightNav', () => {
         expect(wrapper.vm.store.interval).toBeNull();
     });
 
-    test('After 2500 ms, store.moveDown() should be called to create a new line', () => {
+    it('calls store.moveDown() after 2500ms', () => {
         const fallOnRadioBtn = wrapper.find('[name="fallOn"]');
         fallOnRadioBtn.trigger('click');
 
         jest.advanceTimersByTime(2600);
 
         expect(wrapper.vm.store.moveDown).toHaveBeenCalled();
+    });
+
+    it('calls store.moveDown() 4 times, after 4 seconds', () => {
+        const fallOnRadioBtn = wrapper.find('[name="fallOn"]');
+        fallOnRadioBtn.trigger('click');
+
+        jest.advanceTimersByTime(10100);
+
+        expect(wrapper.vm.store.moveDown).toHaveBeenCalledTimes(4);
     });
 });
