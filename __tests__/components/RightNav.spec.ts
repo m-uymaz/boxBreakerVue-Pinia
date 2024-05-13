@@ -5,7 +5,7 @@ import RightNav from '../../src/components/RightNav.vue'
 
 describe('RightNav', () => {
     let wrapper;
-    
+
     beforeEach(() => {
         wrapper = shallowMount(RightNav, {
             global: {
@@ -26,7 +26,7 @@ describe('RightNav', () => {
 
         wrapper.vm.fallOn();
         expect(spy).toHaveBeenCalled();
-        
+    
         jest.advanceTimersByTime(2500);
         expect(wrapper.vm.store.interval).not.toBeNull();
     });
@@ -36,7 +36,7 @@ describe('RightNav', () => {
 
         wrapper.vm.fallOn();
         expect(spy).toHaveBeenCalled();
-        
+    
         jest.advanceTimersByTime(2600);
         expect(wrapper.vm.store.interval).not.toBeNull();
 
