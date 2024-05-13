@@ -1,6 +1,6 @@
 import { setActivePinia, createPinia } from 'pinia';
 import { useAppStateStore } from '../../src/stores/appStateStore';
-import { GridColumnsIndices, GridRowIndices, KeyboardInputs, BoxColors } from '../../src/constants/constants';
+import { GridColumnsIndices, GridRowIndices, KeyboardInputs, BoxColors, STARTING_ARROW_COL_INDEX, ARROW } from '../../src/constants/constants';
 import { AppStore, GridArray } from '../../src/types/types';
 
 describe('AppState Store', () => {
@@ -18,12 +18,20 @@ describe('AppState Store', () => {
 
                 expect(store.gridArray.length).toBe(20);
 
-                store.gridArray.forEach((arr, index) => {
-                    expect(arr.length).toBe(10);
+                store.gridArray.forEach((row, rowIndex) => {
+                    expect(row.length).toBe(10);
 
-                    if (index < 2) {
-                        arr.forEach(el => expect(boxColors.includes(el!)).toBeTruthy());
-                    } else arr.forEach(el => expect(el).toBeNull());
+                    if (rowIndex < 2) {
+                        row.forEach(colEl => expect(boxColors.includes(colEl!)).toBeTruthy());
+                    } else {
+                        row.forEach((colEl, colIndex) => {
+                            if (colIndex === STARTING_ARROW_COL_INDEX && rowIndex === GridRowIndices.Last) {
+                                expect(colEl).toBe(ARROW);
+                            } else {
+                                expect(colEl).toBeNull();
+                            }
+                        });
+                    };
                 });
             });
         });

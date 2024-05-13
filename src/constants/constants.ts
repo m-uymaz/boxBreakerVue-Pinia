@@ -3,6 +3,7 @@ const ALICEBLUE: string = 'aliceblue';
 
 const GRID_BOXES_SIZE: number = 200;
 const LAST_ROW_N_START: number = 190;
+const STARTING_ARROW_COL_INDEX = 5;
 
 enum KeyboardInputs {
     ArrowLeft = 'ArrowLeft',
@@ -43,6 +44,7 @@ export {
     GridColumnsIndices,
     ALICEBLUE,
     ARROW,
+    STARTING_ARROW_COL_INDEX,
     GRID_BOXES_SIZE,
     LAST_ROW_N_START,
 };
