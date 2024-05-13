@@ -117,4 +117,15 @@ describe('RightNav', () => {
 
         expect(wrapper.vm.store.moveDown).toHaveBeenCalledTimes(4);
     });
+
+    test('an active explodeTimeout causes fallOn() to return and not continue the function', () => {
+        const fallOnRadioBtn = wrapper.find('[name="fallOn"]');
+        wrapper.vm.store.timeouts.explodeTimeout = 100;
+
+        fallOnRadioBtn.trigger('click');
+
+        jest.advanceTimersByTime(2000);
+
+        expect(wrapper.vm.store.countMilliseconds).toBe(0);
+    });
 });
