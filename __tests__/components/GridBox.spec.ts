@@ -4,9 +4,10 @@ import { shallowMount, VueWrapper} from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import GridBox from '../../src/components/GridBox.vue';
 import { AppStore } from '../../src/types/types';
+import { ALICEBLUE } from '../../src/constants/constants';
 
 describe('GridBox', () => {
-    let wrapper: VueWrapper;
+    let wrapper;
     let store: AppStore;
 
     beforeEach(() => {
@@ -43,6 +44,16 @@ describe('GridBox', () => {
             expect(wrapper.find('.box-selected').exists()).not.toBe(true);
             expect(wrapper.find('.box').exists()).toBe(true);
             testBoxN += 10;
+        });
+    });
+
+    test('...', () => {
+        const testBoxes = Array.from({ length: 180 }, (_, i) => i + 21);
+
+        testBoxes.forEach(async (testBoxN) => {
+            await wrapper.setProps({ boxN: testBoxN });
+
+            expect(wrapper.vm.rgb).toBe(ALICEBLUE);
         });
     });
 });
