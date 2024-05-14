@@ -13,6 +13,7 @@ describe('AppState Store', () => {
     describe('State', () => {
 
         describe('gridArray', () => {
+            
             it('holds correct initial grid state', () => {
                 const boxColors: string[] = Object.values(BoxColors);
 

@@ -5,11 +5,10 @@ import { useAppStateStore } from "../../../src/stores/appStateStore";
 import { GridArray } from "../../../src/types/types";
 
 describe('Flood Fill Functions', () => {
+    let store;
     beforeEach(() => {
-        // creates a fresh pinia and makes it active
-        // so it's automatically picked up by any useStore() call
-        // without having to pass it to it: `useStore(pinia)`
         setActivePinia(createPinia());
+        store = useAppStateStore();
     });
 
     describe('Fill Function', () => {
@@ -45,7 +44,6 @@ describe('Flood Fill Functions', () => {
 
     describe('FloodFill Function', () => {
         test('if floodFill sets correct blinkingBoxes, checkBoxPositions and explodedBoxes array length', () => {
-            const store = useAppStateStore();
             const colorToDestroy = BoxColors.red;
             const seedGrid: GridArray = Array.from(Array(20), (_, n) => {
                 if (n < 6) return Array(10).fill(colorToDestroy);
@@ -73,8 +71,7 @@ describe('Flood Fill Functions', () => {
     });
 
     describe('FillEmptyGridSpaces Function', () => {
-        test('...', () => {
-            const store = useAppStateStore();
+        test('if function correctly fills null grid spaces, when there are non null above', () => {
             const seedGrid: GridArray = Array.from(Array(20), (_, n) => {
                 if (n < 5 || n > 7) return generateNewLine();
                 return Array(10).fill(null);
