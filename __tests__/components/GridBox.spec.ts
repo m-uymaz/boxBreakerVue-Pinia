@@ -41,7 +41,7 @@ describe('GridBox', () => {
         });
     });
 
-    test('...', () => {
+    test('boxes from 21 onward have rgb computed to ALICEBLUE', () => {
         const testBoxes = Array.from({ length: 180 }, (_, i) => i + 21);
 
         testBoxes.forEach(async (testBoxN) => {
@@ -49,5 +49,13 @@ describe('GridBox', () => {
 
             expect(wrapper.vm.rgb).toBe(ALICEBLUE);
         });
+    });
+
+    test('if arrow box is with arrow style', async () => {
+        const arrowBoxN = 196;
+
+        await wrapper.setProps({ boxN: arrowBoxN });
+
+        expect(wrapper.find('.arrow').exists()).toBe(true);
     });
 });
