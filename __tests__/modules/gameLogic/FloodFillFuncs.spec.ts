@@ -12,6 +12,7 @@ describe('Flood Fill Functions', () => {
     });
 
     describe('Fill Function', () => {
+        
         test('destroying the first two rows with same color boxes', () => {
             const colorToDestroy = BoxColors.blue;
             const seedGrid: GridArray = Array.from(Array(20), (_, n) => {
@@ -43,7 +44,8 @@ describe('Flood Fill Functions', () => {
     });
 
     describe('FloodFill Function', () => {
-        test('if floodFill sets correct blinkingBoxes, checkBoxPositions and explodedBoxes array length', () => {
+
+        test('function sets correct blinkingBoxes, checkBoxPositions and explodedBoxes array length', () => {
             const colorToDestroy = BoxColors.red;
             const seedGrid: GridArray = Array.from(Array(20), (_, n) => {
                 if (n < 6) return Array(10).fill(colorToDestroy);
@@ -71,7 +73,8 @@ describe('Flood Fill Functions', () => {
     });
 
     describe('FillEmptyGridSpaces Function', () => {
-        test('if function correctly fills null grid spaces, when there are non null above', () => {
+
+        test('function correctly fills null grid spaces, when there are non null above', () => {
             const seedGrid: GridArray = Array.from(Array(20), (_, n) => {
                 if (n < 5 || n > 7) return generateNewLine();
                 return Array(10).fill(null);
@@ -91,7 +94,7 @@ describe('Flood Fill Functions', () => {
             expect(areRowsNull()).toBeFalsy();
         });
 
-        test('when filling empty grid space, it add 10 points score per destroyed box', () => {
+        test('filling empty grid space, it add 10 points score per destroyed box', () => {
             const explodedBoxesSeed = [{ y: 0, x: 0 }, { y: 1, x: 0 }, { y: 0, x: 1 }];
             store.explodedBoxes = explodedBoxesSeed;
 
