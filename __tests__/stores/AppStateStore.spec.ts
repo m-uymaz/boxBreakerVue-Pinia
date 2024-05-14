@@ -121,7 +121,7 @@ describe('AppState Store', () => {
             });
 
             test('thrown box to first row, on a null col, equal the thrown box', () => {
-                const seedGrid: GridArray = Array.from(Array(20), (_, n) => {
+                const seedGrid: GridArray = Array.from(Array(20), () => {
                     return Array(10).fill(null);
                 });
                 const testThrownPosition = { y: 0, x: 5 };
@@ -169,9 +169,10 @@ describe('AppState Store', () => {
 
             test('move arrow far right', () => {
                 const mock = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowRight));
+                const moveArrowTimes = 10;
 
                 // move arrow to the left 10 times
-                for (let i = 0; i < 10; i++) mock();
+                for (let i = 0; i < moveArrowTimes; i++) mock();
 
                 expect(mock).toHaveBeenCalledTimes(10);
                 expect(store.arrowIndex).toEqual(GridColumnsIndices.Last);
@@ -179,7 +180,7 @@ describe('AppState Store', () => {
         });
 
         describe('moveDown()', () => {
-            it('creates 1 new grid line', () => {
+            it('adds 1 new grid line to gridArray', () => {
                 const firstLineIndex = 0;
                 const secondLineIndex = 1;
                 const thirdLineIndex = 2;
@@ -194,7 +195,7 @@ describe('AppState Store', () => {
                 expect(store.gridArray[thirdLineIndex].every(el => el !== null)).toBeTruthy();
             });
 
-            test('if explodingBoxes and blinkingBoxesN move their positions, proportional to moveDown() being called', () => {
+            test('if explodingBoxes and blinkingBoxesN move their Y positions, proportional to moveDown() being called', () => {
                 store.explodedBoxes = [{ y: 1, x: 5 }];
                 store.blinkingBoxesN = [10];
 
@@ -205,7 +206,7 @@ describe('AppState Store', () => {
                 expect(store.blinkingBoxesN[0]).toBe(30);
             });
 
-            it('fills the whole grid', () => {
+            it('fills the gridArray with colored boxes', () => {
                 for (let i = 0; i < GridRowIndices.Last; i++) store.moveDown();
 
                 for (let i = 0; i < GridRowIndices.Last; i++) {
@@ -215,12 +216,13 @@ describe('AppState Store', () => {
         });
 
         test('throw box to far left', () => {
-            const farLeftThrowPosition = { y: 2, x: 0 }
+            const farLeftThrowPosition = { y: 2, x: 0 };
+            const moveArrowTimes = 10;
 
             store.catchBox();
             const caughtBox = store.caughtBox;
 
-            for (let i = 0; i < 10; i++) store.playerMovements(KeyboardInputs.ArrowLeft);
+            for (let i = 0; i < moveArrowTimes; i++) store.playerMovements(KeyboardInputs.ArrowLeft);
         
             expect(store.gridArray[farLeftThrowPosition.y][farLeftThrowPosition.x]).toBeNull();
 
@@ -231,11 +233,12 @@ describe('AppState Store', () => {
 
         test('throw box to far right', () => {
             const farLeftDropPosition = { y: 2, x: 9 }
+            const moveArrowTimes = 10;
 
             store.catchBox();
             const caughtBox = store.caughtBox;
 
-            for (let i = 0; i < 10; i++) store.playerMovements(KeyboardInputs.ArrowRight);
+            for (let i = 0; i < moveArrowTimes; i++) store.playerMovements(KeyboardInputs.ArrowRight);
         
             expect(store.gridArray[farLeftDropPosition.y][farLeftDropPosition.x]).toBeNull();
 
@@ -244,12 +247,12 @@ describe('AppState Store', () => {
             expect(store.gridArray[farLeftDropPosition.y][farLeftDropPosition.x]).toEqual(caughtBox);
         });
 
-        test('if one box will cause game over, when it reaches the last grid index', () => {
+        test('if one colored box causes game over, when it reaches the last grid index', () => {
             store.catchBox();
             store.playerMovements(KeyboardInputs.ArrowRight);
             store.throwBox();
 
-            for (let i = 0; i < 20; i++) store.moveDown();
+            for (let i = 0; i < GridRowIndices.Last; i++) store.moveDown();
 
             expect(store.gameOverState).toBe(true);
         });
