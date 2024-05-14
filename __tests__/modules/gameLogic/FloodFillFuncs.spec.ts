@@ -2,10 +2,10 @@ import { setActivePinia, createPinia } from "pinia";
 import { BoxColors } from "../../../src/constants/constants";
 import { floodFill, fill, fillEmptyGridSpaces, generateNewLine } from "../../../src/modules/gameLogic"
 import { useAppStateStore } from "../../../src/stores/appStateStore";
-import { GridArray } from "../../../src/types/types";
+import { AppStore, GridArray } from "../../../src/types/types";
 
 describe('Flood Fill Functions', () => {
-    let store;
+    let store: AppStore;
     beforeEach(() => {
         setActivePinia(createPinia());
         store = useAppStateStore();
@@ -89,6 +89,15 @@ describe('Flood Fill Functions', () => {
             fillEmptyGridSpaces(store);
 
             expect(areRowsNull()).toBeFalsy();
+        });
+
+        test('when filling empty grid space, it add 10 points score per destroyed box', () => {
+            const explodedBoxesSeed = [{ y: 0, x: 0 }, { y: 1, x: 0 }, { y: 0, x: 1 }];
+            store.explodedBoxes = explodedBoxesSeed;
+
+            fillEmptyGridSpaces(store);
+
+            expect(store.score).toBe(30);
         });
     });
 });
