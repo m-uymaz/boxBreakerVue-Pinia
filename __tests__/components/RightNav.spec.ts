@@ -28,17 +28,14 @@ describe('RightNav', () => {
         expect(spy).toHaveBeenCalled();
     
         jest.advanceTimersByTime(2500);
-        expect(wrapper.vm.store.interval).not.toBeNull();
+        expect(typeof wrapper.vm.store.interval).toBe('number');
     });
 
     it('stops the fall when fallOff() is called', () => {
-        const spy = jest.spyOn(wrapper.vm, 'fallOn');
-
         wrapper.vm.fallOn();
-        expect(spy).toHaveBeenCalled();
     
         jest.advanceTimersByTime(2600);
-        expect(wrapper.vm.store.interval).not.toBeNull();
+        expect(typeof wrapper.vm.store.interval).toBe('number');
 
         wrapper.vm.fallOff();
         expect(wrapper.vm.store.interval).toBeNull();
@@ -48,12 +45,12 @@ describe('RightNav', () => {
         expect(wrapper.vm.store.interval).toBeNull();
 
         wrapper.find('[name="fallOn"]').trigger('click');
-        expect(wrapper.vm.store.interval).not.toBeNull();
+        expect(typeof wrapper.vm.store.interval).toBe('number');
     });
 
     test('if OFF radio btn clears interval', () => {
         wrapper.find('[name="fallOn"]').trigger('click');
-        expect(wrapper.vm.store.interval).not.toBeNull();
+        expect(typeof wrapper.vm.store.interval).toBe('number');
 
         wrapper.find('[name="fallOff"]').trigger('click');
         expect(wrapper.vm.store.interval).toBeNull();
