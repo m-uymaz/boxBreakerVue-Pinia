@@ -137,43 +137,43 @@ describe('AppState Store', () => {
             test('moving arrow left', () => {
                 let defaultArrowIndex = store.arrowIndex;
 
-                const mock = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowLeft));
+                const fn = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowLeft));
 
-                mock();
+                fn();
 
-                expect(mock).toHaveBeenCalledTimes(1);
+                expect(fn).toHaveBeenCalledTimes(1);
                 expect(store.arrowIndex).toEqual(--defaultArrowIndex);
             });
 
             test('move arrow far left', () => {
-                const mock = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowLeft));
+                const fn = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowLeft));
 
                 // move arrow to the left 10 times
-                for (let i = 0; i < 10; i++) mock();
+                for (let i = 0; i < 10; i++) fn();
 
-                expect(mock).toHaveBeenCalledTimes(10);
+                expect(fn).toHaveBeenCalledTimes(10);
                 expect(store.arrowIndex).toEqual(GridColumnsIndices.First);
             });
 
             test('moving arrow right', () => {
-                let defaultArrowIndex = store.arrowIndex;
+                const expectedArrowIndex = 6;
 
-                const mock = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowRight));
+                const fn = jest.fn(() =>store.playerMovements(KeyboardInputs.ArrowRight));
 
-                mock();
+                fn();
 
-                expect(mock).toHaveBeenCalledTimes(1);
-                expect(store.arrowIndex).toEqual(++defaultArrowIndex);
+                expect(fn).toHaveBeenCalledTimes(1);
+                expect(store.arrowIndex).toEqual(expectedArrowIndex);
             });
 
             test('move arrow far right', () => {
-                const mock = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowRight));
+                const fn = jest.fn(() => store.playerMovements(KeyboardInputs.ArrowRight));
                 const moveArrowTimes = 10;
 
                 // move arrow to the left 10 times
-                for (let i = 0; i < moveArrowTimes; i++) mock();
+                for (let i = 0; i < moveArrowTimes; i++) fn();
 
-                expect(mock).toHaveBeenCalledTimes(10);
+                expect(fn).toHaveBeenCalledTimes(10);
                 expect(store.arrowIndex).toEqual(GridColumnsIndices.Last);
             });
         });
