@@ -1,6 +1,13 @@
 import { defineStore } from "pinia";
 
-import { generateInitialGrid, generateNewLine } from "../modules/gameLogic";
+import {
+    generateInitialGrid,
+    generateNewLine,
+    topHorizontalRtoL,
+    topVerticalRToL,
+    bottomHorizontalLToR,
+    bottomVerticalLToR
+} from "../modules/gameLogic";
 
 import { AppStateInterface, newLineArray } from "../types/types";
 import { GridLengths, KeyboardInputs, GridColumnsIndices, GridRowIndices, ARROW } from "../constants/constants";
@@ -10,7 +17,6 @@ export const useAppStateStore = defineStore('appStateStore', {
         gridArray: generateInitialGrid(),
         timeouts: {
             explodeTimeout: null,
-            fillEmptyGridSpacesTimeout: null,
         },
         checkBoxPositions: [],
         explodedBoxes: [],
@@ -40,7 +46,8 @@ export const useAppStateStore = defineStore('appStateStore', {
 
     actions: {
         setGameOver(): void {
-            this.gameOverState = true;
+            this.gameOverState = true
+            this.gameOverBoxDance()
         },
         playerMovements(direction: string): void {
             if (
@@ -122,6 +129,12 @@ export const useAppStateStore = defineStore('appStateStore', {
 
             if (!isUpperRowBlank) this.highestPositionY++;
             if (this.highestPositionY + 1 === GridLengths.RowLength) this.setGameOver();
+        },
+        gameOverBoxDance() {
+            bottomHorizontalLToR(this.gridArray)
+            topHorizontalRtoL(this.gridArray)
+            bottomVerticalLToR(this.gridArray)
+            topVerticalRToL(this.gridArray)
         }
     }
 })
