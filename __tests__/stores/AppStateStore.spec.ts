@@ -59,8 +59,6 @@ describe('AppState Store', () => {
             it('sets game over state to true', () => {
                 store.setGameOver();
 
-                // Any point of using this?
-                expect(store.setGameOver).toBeInstanceOf(Function);
                 expect(store.gameOverState).toBeTruthy();
             });
         });
