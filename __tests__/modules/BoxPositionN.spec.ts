@@ -1,5 +1,5 @@
-import { GRID_BOXES_SIZE, GridColumnsIndices, GridRowIndices } from "../../../src/constants/constants";
-import { boxPositionN } from "../../../src/modules/gameLogic";
+import { GRID_BOXES_SIZE, GridColumnsIndices, GridRowIndices } from "../../src/constants/constants";
+import { boxPositionN } from "../../src/modules/gameLogic";
 
 describe('BoxPositionN', () => {
     it('returns fist grid box number', () => {

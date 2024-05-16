@@ -1,5 +1,5 @@
-import { randomColor } from "../../../src/modules/gameLogic"
-import { BoxColors } from "../../../src/constants/constants";
+import { randomColor } from "../../src/modules/gameLogic"
+import { BoxColors } from "../../src/constants/constants";
 describe('randomColor()', () => {
     it('creates a random color object', () => {
         const colorObj = randomColor();

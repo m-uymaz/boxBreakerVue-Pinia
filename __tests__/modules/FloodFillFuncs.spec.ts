@@ -1,8 +1,8 @@
 import { setActivePinia, createPinia } from "pinia";
-import { BoxColors } from "../../../src/constants/constants";
-import { floodFill, fill, fillEmptyGridSpaces, generateNewLine } from "../../../src/modules/gameLogic"
-import { useAppStateStore } from "../../../src/stores/appStateStore";
-import { AppStore, GridArray } from "../../../src/types/types";
+import { BoxColors } from "../../src/constants/constants";
+import { floodFill, fill, fillEmptyGridSpaces, generateNewLine } from "../../src/modules/gameLogic"
+import { useAppStateStore } from "../../src/stores/appStateStore";
+import { AppStore, GridArray } from "../../src/types/types";
 
 describe('Flood Fill Functions', () => {
     let store: AppStore;

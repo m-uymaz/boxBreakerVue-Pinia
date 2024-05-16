@@ -1,7 +1,7 @@
 import { setActivePinia, createPinia } from "pinia";
-import { explodeDelay, fillEmptyGridSpacesDelay, clearPrevTimeouts } from "../../../src/modules/gameLogic";
-import { useAppStateStore } from "../../../src/stores/appStateStore";
-import { AppStore } from "../../../src/types/types";
+import { explodeDelay, fillEmptyGridSpacesDelay, clearPrevTimeouts } from "../../src/modules/gameLogic";
+import { useAppStateStore } from "../../src/stores/appStateStore";
+import { AppStore } from "../../src/types/types";
 
 describe("Timeouts", () => {
     let store: AppStore;

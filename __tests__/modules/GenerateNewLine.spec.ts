@@ -1,5 +1,5 @@
-import { generateNewLine } from "../../../src/modules/gameLogic"
-import { BoxColors } from "../../../src/constants/constants";
+import { generateNewLine } from "../../src/modules/gameLogic"
+import { BoxColors } from "../../src/constants/constants";
 
 describe('generateNewLine()', () => {
     it('generates a new array with a length of 10', () => {

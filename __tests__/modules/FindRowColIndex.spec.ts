@@ -1,5 +1,5 @@
-import { GridColumnsIndices, GridRowIndices } from "../../../src/constants/constants";
-import { rowIndex, colIndex } from "../../../src/modules/gameLogic";
+import { GridColumnsIndices, GridRowIndices } from "../../src/constants/constants";
+import { rowIndex, colIndex } from "../../src/modules/gameLogic";
 
 describe('Finds Row index', () => {
     test('returns the first row index', () => {
