@@ -41,7 +41,7 @@ const rgb = computed(() => {
     }
 })
 
-const isBoxOnArrowVertical = computed(() => {
+const isBoxOnArrowShadow = computed(() => {
     return (colIndex(props.boxN) === arrowIndex.value)
 })
 
@@ -57,8 +57,8 @@ const classObject = computed(() => ({
     'soon-to-explode': isBoxBlinking.value,
     'box-explosion': isBoxExploding.value,
     'arrow': isBoxArrow.value,
-    'box': !isBoxOnArrowVertical.value,
-    'box-selected': isBoxOnArrowVertical.value
+    'box': !isBoxOnArrowShadow.value,
+    'box-selected': isBoxOnArrowShadow.value
     }))
 </script>
 

@@ -31,6 +31,8 @@ const fallOn = () => {
             !store.fall
             ||
             store.timeouts.explodeTimeout
+            ||
+            store.timeouts.fillEmptyGridSpacesTimeout
         ) return;
 
         if (store.gameOverState && store.interval) {

@@ -2,7 +2,8 @@ import { useAppStateStore } from "../stores/appStateStore";
 export type AppStateInterface = {
   	gridArray: GridArray;
   	timeouts: {
-    	explodeTimeout: NodeJS.Timeout | null;
+        explodeTimeout: NodeJS.Timeout | null;
+        fillEmptyGridSpacesTimeout: NodeJS.Timeout | null;
   	}
   	checkBoxPositions: ExplodedBoxes;
   	explodedBoxes: ExplodedBoxes;

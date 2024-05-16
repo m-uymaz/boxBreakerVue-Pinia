@@ -18,7 +18,7 @@ import { onMounted } from 'vue'
 import { KeyboardInputs } from './constants/constants'
 import { useAppStateStore } from './stores/appStateStore'
 // Modules
-import { floodFill, explodeDelay, clearPrevTimeouts } from './modules/gameLogic'
+import { floodFill, explodeDelay, clearPrevTimeouts, fillEmptyGridSpacesDelay } from './modules/gameLogic'
 // Components
 import Playground from './components/Playground.vue'
 import LeftNav from './components/LeftNav.vue'
@@ -77,6 +77,7 @@ async function floodFillChain(position: { y: number, x: number }): Promise<void>
     if (!explodedBoxes.value.length) return
 
     await explodeDelay(store, 500)
+    await fillEmptyGridSpacesDelay(store, 500)
 
     checkBoxPositions.value.forEach((newPosition) => {
         floodFillChain(newPosition)
