@@ -17,6 +17,7 @@ export const useAppStateStore = defineStore('appStateStore', {
         gridArray: generateInitialGrid(),
         timeouts: {
             explodeTimeout: null,
+            fillEmptyGridSpacesTimeout: null
         },
         checkBoxPositions: [],
         explodedBoxes: [],

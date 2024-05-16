@@ -36,7 +36,7 @@ const fillEmptyGridSpacesDelay = (store: AppStore, time: number) => {
                 resolve();
             }, time);
 
-            store.timeouts.explodeTimeout = timeout;
+            store.timeouts.fillEmptyGridSpacesTimeout = timeout;
         } catch (err) {
             reject(err);
         }
