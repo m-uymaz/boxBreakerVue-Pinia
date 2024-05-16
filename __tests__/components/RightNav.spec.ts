@@ -106,6 +106,26 @@ describe('RightNav', () => {
         expect(wrapper.vm.store.moveDown).toHaveBeenCalled();
     });
 
+    it('skips adding 100 ms to store.countMilliseconds, when there is a setTimeout in progress', () => {
+        const fallOnRadioBtn = wrapper.find('[name="fallOn"]');
+        wrapper.vm.store.timeouts.fillEmptyGridSpacesTimeout = 1;
+        fallOnRadioBtn.trigger('click');
+
+        jest.advanceTimersByTime(2500);
+
+        expect(wrapper.vm.store.countMilliseconds).toBe(0);
+    });
+
+    it('does not call store.moveDown() after 2500 ms, when there is an active setTimeout in progress', () => {
+        const fallOnRadioBtn = wrapper.find('[name="fallOn"]');
+        wrapper.vm.store.timeouts.fillEmptyGridSpacesTimeout = 1;
+        fallOnRadioBtn.trigger('click');
+
+        jest.advanceTimersByTime(2600);
+
+        expect(wrapper.vm.store.moveDown).not.toHaveBeenCalled();
+    });
+
     it('calls store.moveDown() 4 times, after 4 seconds', () => {
         const fallOnRadioBtn = wrapper.find('[name="fallOn"]');
         fallOnRadioBtn.trigger('click');
