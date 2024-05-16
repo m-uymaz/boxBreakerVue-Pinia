@@ -112,12 +112,7 @@ const classObject = computed(() => ({
         background-size: contain;
     }
 
-    75% {
-        background-color: aliceblue;
-    }
-
     100% {
-        background-color: aliceblue;
         background-image: none;
     }
 }

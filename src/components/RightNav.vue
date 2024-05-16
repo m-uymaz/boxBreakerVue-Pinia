@@ -7,11 +7,11 @@
             <fieldset>
                 <label @click="fallClickHandler" for="fall-on">
                     On
-                    <input type="radio" value="true" name="fallOn" id="fall-on">
+                    <input type="radio" name="fallOn" id="fall-on" :value="true" v-model="falling">
                 </label>
                 <label @click="fallClickHandler" for="fall-off">
                     Off
-                    <input type="radio" value="false" name="fallOff" id="fall-off" checked>
+                    <input type="radio" name="fallOff" id="fall-off" :value="false" v-model="falling">
                 </label>
             </fieldset>
         </div>
@@ -19,8 +19,10 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useAppStateStore } from '../stores/appStateStore'
 
+const falling = ref(false)
 const store = useAppStateStore()
 
 const fallOn = () => {
