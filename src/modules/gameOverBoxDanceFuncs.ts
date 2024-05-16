@@ -12,6 +12,7 @@ const randomColorForDance = (gridArray: GridArray, y: number, x: number, ms: num
     }, ms);
 };
 
+// HORIZONTAL
 const bottomHorizontalLToR = (gridArray: GridArray) => {
     let ms = 15;
 
@@ -34,6 +35,7 @@ const topHorizontalRtoL = (gridArray: GridArray) => {
     }
 };
 
+//VERTICAL
 const bottomVerticalLToR = (gridArray: GridArray) => {
     let ms = 15
 
