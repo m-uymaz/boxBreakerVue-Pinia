@@ -1,3 +1,3 @@
 export const boxPositionN = (y: number, x: number) => {
-    return (y * 10) + (x + 1);
+  return y * 10 + (x + 1)
 }
