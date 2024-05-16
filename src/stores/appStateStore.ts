@@ -108,7 +108,7 @@ export const useAppStateStore = defineStore('appStateStore', {
 
         if (yIndex !== GridRowIndices.First) {
           //Put the box on the next Y index
-          let upperGridIndex: number = yIndex + 1
+          const upperGridIndex: number = yIndex + 1
           this.gridArray[upperGridIndex][this.arrowIndex] = this.caughtBox
 
           this.thrownBox = { y: yIndex + 1, x: this.arrowIndex }
@@ -137,7 +137,7 @@ export const useAppStateStore = defineStore('appStateStore', {
       this.gridArray.pop()
       this.gridArray.unshift(newArray)
 
-      let isUpperRowBlank: boolean = this.gridArray[this.highestPositionY + 1].every(
+      const isUpperRowBlank: boolean = this.gridArray[this.highestPositionY + 1].every(
         (box) => box === null
       )
 

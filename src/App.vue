@@ -25,7 +25,7 @@ import {
   fillEmptyGridSpacesDelay
 } from './modules/gameLogic'
 // Components
-import Playground from './components/Playground.vue'
+import Playground from './components/Play-ground.vue'
 import LeftNav from './components/LeftNav.vue'
 import RightNav from './components/RightNav.vue'
 import GameOverBanner from './components/GameOverBanner.vue'
