@@ -21,7 +21,7 @@ describe('GridBox', () => {
 
     describe('Common Grid Array Boxes Styles', () => {
 
-        test('all column boxes with "arrowIndex" index have .box-selected class', () => {
+        test('all column boxes with "arrowIndex" index have .box-selected style', () => {
             let testBoxN = 6;
 
             wrapper.vm.store.gridArray.forEach(async () => {
@@ -33,7 +33,7 @@ describe('GridBox', () => {
             });
         });
 
-        test('column boxes NOT with "arrowIndex" index, have .box class', () => {
+        test('column boxes NOT with "arrowIndex" index, have .box style', () => {
             let testBoxN = 10;
 
             wrapper.vm.store.gridArray.forEach(async () => {
@@ -85,6 +85,7 @@ describe('GridBox', () => {
     });
 
     describe('Blinking Boxes', () => {
+
         test('boxes set to blink have .soon-to-explode style', async () => {
             wrapper.vm.store.blinkingBoxesN = [15, 7, 2];
 
