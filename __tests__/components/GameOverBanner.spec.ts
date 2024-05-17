@@ -11,18 +11,18 @@ describe('GameOverBanner', () => {
         });
     });
 
-    test('displays game over message', async () => {
-        await wrapper.setProps({ isGameOver: false });
-
-        expect(wrapper.props().isGameOver).toBe(false);
-        expect(wrapper.find('.h1-none').exists()).toBe(true);
-    });
-
-    test('does not display game over message', async () => {
+    it('displays game over message', async () => {
         await wrapper.setProps({ isGameOver: true });
 
         expect(wrapper.props().isGameOver).toBeTruthy();
         expect(wrapper.find('.h1-blinking').exists()).toBe(true);
         expect(wrapper.find('.h1-none').exists()).toBe(false);
+    });
+
+    it('does not display game over message ', async () => {
+        await wrapper.setProps({ isGameOver: false });
+
+        expect(wrapper.props().isGameOver).toBe(false);
+        expect(wrapper.find('.h1-none').exists()).toBe(true);
     });
 });
