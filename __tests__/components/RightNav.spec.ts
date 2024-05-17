@@ -101,7 +101,7 @@ describe('RightNav', () => {
         const fallOnRadioBtn = wrapper.find('[name="fallOn"]');
         fallOnRadioBtn.trigger('click');
 
-        jest.advanceTimersByTime(2600);
+        jest.advanceTimersByTime(3000);
 
         expect(wrapper.vm.store.moveDown).toHaveBeenCalled();
     });
@@ -121,12 +121,12 @@ describe('RightNav', () => {
         wrapper.vm.store.timeouts.fillEmptyGridSpacesTimeout = 1;
         fallOnRadioBtn.trigger('click');
 
-        jest.advanceTimersByTime(2600);
+        jest.advanceTimersByTime(3000);
 
         expect(wrapper.vm.store.moveDown).not.toHaveBeenCalled();
     });
 
-    it('calls store.moveDown() 4 times, after 4 seconds', () => {
+    it('calls store.moveDown() 4 times, after 10000 ms', () => {
         const fallOnRadioBtn = wrapper.find('[name="fallOn"]');
         fallOnRadioBtn.trigger('click');
 
@@ -137,7 +137,7 @@ describe('RightNav', () => {
 
     test('an active explodeTimeout causes fallOn() to not continue the function and not increment countMilliseconds', () => {
         const fallOnRadioBtn = wrapper.find('[name="fallOn"]');
-        wrapper.vm.store.timeouts.explodeTimeout = 100;
+        wrapper.vm.store.timeouts.explodeTimeout = 1;
 
         fallOnRadioBtn.trigger('click');
 
