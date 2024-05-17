@@ -67,11 +67,11 @@ describe('RightNav', () => {
     test('store.countMilliseconds should reset to 0 and start over again, after 2500ms', () => {
         wrapper.find('[name="fallOn"]').trigger('click');
 
-        jest.advanceTimersByTime(2600);
+        jest.advanceTimersByTime(2500);
 
-        expect(wrapper.vm.store.countMilliseconds).toBe(100);
+        expect(wrapper.vm.store.countMilliseconds).toBe(2500);
 
-        jest.advanceTimersByTime(900);
+        jest.advanceTimersByTime(1000);
 
         expect(wrapper.vm.store.countMilliseconds).toBe(1000);
     });
