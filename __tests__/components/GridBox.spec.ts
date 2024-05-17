@@ -64,7 +64,7 @@ describe('GridBox', () => {
             expect(wrapper.find('.arrow').exists()).toBe(true);
         });
 
-        test('if the arrow box has rgb computed to ALICEBLUE', async () => {
+        test('if the arrow box has "rgb" computed to ALICEBLUE', async () => {
             await wrapper.setProps({ boxN: arrowBoxN });
 
             expect(wrapper.vm.rgb).toBe(ALICEBLUE);
