@@ -15,7 +15,7 @@ describe('LeftNav', () => {
 
         expect(wrapper.props().scoreString).toBe(str);
         expect(wrapper.find('#score-span').exists()).toBe(true);
-        expect(wrapper.find('#score-span').isVisible()).toBe(true);
+        expect(wrapper.find('#score-span').isVisible()).toBeTruthy();
         expect(wrapper.find('#score-span').text()).toBe(str);
     });
 });
